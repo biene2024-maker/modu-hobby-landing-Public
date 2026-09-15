@@ -543,6 +543,13 @@ fieldset{border:0;padding:0;margin:0;min-width:0}
   .fitbar i{transition:width .8s cubic-bezier(.2,.7,.3,1) .25s}
 }
 @keyframes qpop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
+.qshare{
+  margin-top:var(--s6);padding-top:var(--s5);border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);
+}
+.qshare .lbl{width:100%;font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:.1rem}
+.qshare .btn svg{flex:none}
+.qshare .copied{width:100%}
 .qrestart{font:inherit;font-weight:600;font-size:.92rem;color:var(--ink-3);background:none;border:0;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px}
 .qrestart:hover{color:var(--ink)}
 .qcardout{background:var(--surface);border:2px solid var(--accent);border-radius:var(--r-xl);padding:clamp(var(--s5),4vw,var(--s7));box-shadow:var(--shadow)}
@@ -1276,6 +1283,20 @@ footer b{color:var(--ink-2);font-weight:700}
           <h2 class="qtype">당신은 <em id="q-type">Social Explorer</em></h2>
           <p class="qdesc" id="q-desc"></p>
           <ul class="fitlist" id="q-fits"></ul>
+
+          <div class="qshare">
+            <span class="lbl">결과 카드 공유하기</span>
+            <button type="button" class="btn btn-primary btn-sm" id="q-share">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+              공유하기
+            </button>
+            <button type="button" class="btn btn-soft btn-sm" id="q-image">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m21 16-5-5-8 8"/></svg>
+              카드 이미지 저장
+            </button>
+            <button type="button" class="btn btn-soft btn-sm" id="q-link">링크 복사</button>
+            <span class="copied" id="q-share-msg" hidden></span>
+          </div>
           <p class="qnote">
             <b>협력형</b>은 서로 맞물려야 되는 활동이고, <b>병행형</b>은 같은 자리에 모이되
             각자 자기 결과물을 만드는 활동입니다. 혼자가 편한 분도 병행형은 부담이 적어요.
@@ -1633,8 +1654,160 @@ footer b{color:var(--ink-2);font-weight:700}
     document.getElementById("q-slipwrap").hidden = true;
     form.hidden = false;
     show(0, true);
+    if (location.hash.indexOf("r=") === 1) history.replaceState(null, "", location.pathname + location.search);
     form.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   });
+
+  /* ── 결과 카드 공유 ──
+     답 6개를 a/b 여섯 글자로 접어 링크에 싣는다. 링크를 연 사람은 같은 결과를 바로 본다. */
+  var SITE = "https://biene2024-maker.github.io/modu-hobby-landing-Public/";
+  var Q = ["q1", "q2", "q3", "q4", "q5", "q6"];
+
+  function code() {
+    var f = new FormData(form);
+    return Q.map(function (k) { return f.get(k) === "1" ? "a" : "b"; }).join("");
+  }
+  function shareUrl() { return SITE + "#r=" + code(); }
+  function shareText() {
+    var names = state.top.slice(0, 3).map(function (h) { return h.name; }).join(", ");
+    return "나는 " + state.type[0] + " — 잘 맞는 취미: " + names + "\n모두의 취미 · 무료 취미 진단";
+  }
+
+  var msg = document.getElementById("q-share-msg");
+  function say(t) { msg.textContent = t; msg.hidden = false; setTimeout(function () { msg.hidden = true; }, 2200); }
+  function copy(t, done) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).then(done, function () { legacy(t); done(); });
+    } else { legacy(t); done(); }
+    function legacy(v) {
+      var ta = document.createElement("textarea");
+      ta.value = v; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  }
+
+  document.getElementById("q-link").addEventListener("click", function () {
+    if (!state) return;
+    copy(shareUrl(), function () { say("링크를 복사했어요. 붙여넣으면 같은 결과 카드가 열립니다."); });
+  });
+
+  document.getElementById("q-share").addEventListener("click", function () {
+    if (!state) return;
+    var data = { title: "모두의 취미 · 취미 진단", text: shareText(), url: shareUrl() };
+    if (navigator.share) {
+      navigator.share(data).catch(function () {});           // 사용자가 취소하면 조용히
+    } else {
+      copy(shareText() + "\n" + shareUrl(), function () { say("이 브라우저는 공유창이 없어 글과 링크를 복사했어요."); });
+    }
+  });
+
+  /* 카드 이미지 — 1080×1350, 캔버스로 그린다 */
+  function wrap(ctx, text, maxW) {
+    var lines = [], line = "";
+    for (var i = 0; i < text.length; i++) {
+      var t = line + text[i];
+      if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = text[i]; }
+      else line = t;
+    }
+    if (line) lines.push(line);
+    return lines;
+  }
+  function roundRect(ctx, x, y, w, h, r) {
+    r = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function drawCard(done) {
+    var W = 1080, H = 1350, P = 84;
+    var c = document.createElement("canvas"); c.width = W; c.height = H;
+    var ctx = c.getContext("2d");
+    var disp = "'Gothic A1','Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif";
+    var sans = "'Pretendard','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif";
+    var ACC = "#C24A14", INK = "#1B1815", INK2 = "#4F4944", INK3 = "#847C74", SOFT = "#FDE6D8", LINE = "#ECE6DE";
+
+    function paint() {
+      ctx.fillStyle = "#FFFFFF"; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "#F7F4EF"; ctx.fillRect(0, 0, W, 300);
+      // 브랜드
+      ctx.fillStyle = "#E8632B"; ctx.beginPath(); ctx.arc(P + 14, 118, 14, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = INK; ctx.font = "900 40px " + disp; ctx.textBaseline = "middle";
+      ctx.fillText("모두의 취미", P + 44, 118);
+      ctx.fillStyle = ACC; ctx.font = "700 28px " + sans;
+      ctx.fillText("무료 취미 진단 결과", P, 200);
+      // 타입
+      ctx.textBaseline = "alphabetic";
+      ctx.fillStyle = INK2; ctx.font = "700 44px " + disp; ctx.fillText("당신은", P, 400);
+      ctx.fillStyle = ACC; ctx.font = "900 108px " + disp; ctx.fillText(state.type[0], P, 510);
+      // 설명
+      ctx.fillStyle = INK2; ctx.font = "400 34px " + sans;
+      var y = 590;
+      wrap(ctx, state.type[1], W - P * 2).slice(0, 3).forEach(function (l) { ctx.fillText(l, P, y); y += 52; });
+      // 막대 5개
+      y += 40;
+      ctx.strokeStyle = LINE; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(P, y); ctx.lineTo(W - P, y); ctx.stroke();
+      y += 70;
+      var bx = P + 300, bw = W - P - bx - 130;
+      state.top.forEach(function (h) {
+        ctx.fillStyle = INK; ctx.font = "700 34px " + sans; ctx.fillText(h.name, P, y + 12);
+        ctx.fillStyle = h.kind === "협력형" ? ACC : (h.kind === "병행형" ? "#1E3A5F" : INK3);
+        ctx.font = "600 22px " + sans; ctx.fillText(h.kind, P, y + 48);
+        ctx.fillStyle = SOFT; roundRect(ctx, bx, y - 4, bw, 22, 11); ctx.fill();
+        ctx.fillStyle = ACC; roundRect(ctx, bx, y - 4, bw * h.fit / 100, 22, 11); ctx.fill();
+        ctx.fillStyle = ACC; ctx.font = "800 34px " + disp; ctx.textAlign = "right";
+        ctx.fillText(h.fit + "%", W - P, y + 12); ctx.textAlign = "left";
+        y += 100;
+      });
+      // 푸터
+      ctx.fillStyle = "#F7F4EF"; ctx.fillRect(0, H - 150, W, 150);
+      ctx.fillStyle = INK2; ctx.font = "700 30px " + sans; ctx.fillText("나도 해보기 · 6문항 1분", P, H - 86);
+      ctx.fillStyle = INK3; ctx.font = "400 26px " + sans; ctx.fillText(SITE.replace("https://", ""), P, H - 44);
+      done(c);
+    }
+    // 웹폰트가 준비된 뒤 그린다 (실패해도 시스템 서체로 진행)
+    if (document.fonts && document.fonts.load) {
+      Promise.all([
+        document.fonts.load("900 108px 'Gothic A1'"),
+        document.fonts.load("700 34px 'Noto Sans KR'")
+      ]).then(paint, paint);
+    } else paint();
+  }
+
+  document.getElementById("q-image").addEventListener("click", function () {
+    if (!state) return;
+    say("카드를 만드는 중…");
+    drawCard(function (c) {
+      c.toBlob(function (blob) {
+        var file = new File([blob], "취미진단-" + state.type[0].replace(/\s+/g, "") + ".png", { type: "image/png" });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          navigator.share({ files: [file], title: "모두의 취미 · 취미 진단", text: shareText() })
+            .then(function () { msg.hidden = true; }, function () { msg.hidden = true; });
+        } else {
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(blob); a.download = file.name;
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+          setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+          say("이미지를 저장했어요.");
+        }
+      }, "image/png");
+    });
+  });
+
+  /* 공유 링크로 들어온 경우 — 답을 채우고 결과를 바로 보여준다 */
+  (function fromLink() {
+    var m = location.hash.match(/r=([ab]{6})/);
+    if (!m) return;
+    Q.forEach(function (k, i) {
+      var v = m[1][i] === "a" ? "1" : "-1";
+      var r = form.querySelector('input[name="' + k + '"][value="' + v + '"]');
+      if (r) r.checked = true;
+    });
+    state = calc();
+    form.hidden = true;
+    render();
+  })();
 
   /* ── 동호회 제안서 ── */
   var slipWrap = document.getElementById("q-slipwrap");
