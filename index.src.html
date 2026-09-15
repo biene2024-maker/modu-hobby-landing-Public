@@ -1770,6 +1770,14 @@ footer b{color:var(--ink-2);font-weight:700}
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           navigator.share({ files: [file], title: "모두의 취미 · 취미 진단", text: shareText() })
             .then(function () { msg.hidden = true; }, function () { msg.hidden = true; });
+        } else if (window.claude && window.claude.use) {
+          // Claude 아티팩트 안에서는 페이지가 직접 내려받기를 시작할 수 없다 — 뷰어에 저장을 요청한다
+          window.claude.use("downloads").then(function (dl) {
+            if (!dl) { say("이 화면에서는 저장할 수 없어요. 공유 링크를 써주세요."); return; }
+            dl.save({ filename: file.name, data: blob })
+              .then(function () { say("이미지를 저장했어요."); },
+                    function (e) { if (e && e.code !== "declined") say("저장하지 못했어요."); else msg.hidden = true; });
+          });
         } else {
           var a = document.createElement("a");
           a.href = URL.createObjectURL(blob); a.download = file.name;
