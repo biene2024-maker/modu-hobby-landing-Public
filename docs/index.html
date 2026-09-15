@@ -1815,6 +1815,10 @@ footer b{color:var(--ink-2);font-weight:700}
     state = calc();
     form.hidden = true;
     render();
+    // 브라우저가 로드 후 스크롤을 맨 위로 되돌리므로, 로드가 끝난 뒤 한 번 더 결과로 내린다
+    function toResult() { out.scrollIntoView({ behavior: "auto", block: "start" }); }
+    if (document.readyState === "complete") setTimeout(toResult, 60);
+    else window.addEventListener("load", function () { setTimeout(toResult, 60); });
   })();
 
   /* ── 동호회 제안서 ── */
