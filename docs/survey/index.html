@@ -146,10 +146,10 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
         <span class="tag">02</span>
         <h2>어떤 역할로 답하시나요?</h2>
         <div class="opts two">
-          <label class="opt"><input type="radio" name="role" value="HR·People팀"><span>HR · People팀</span></label>
-          <label class="opt"><input type="radio" name="role" value="총무·GA"><span>총무 · GA</span></label>
+          <label class="opt"><input type="radio" name="role" value="HR/People 팀"><span>HR · People팀</span></label>
+          <label class="opt"><input type="radio" name="role" value="총무/GA"><span>총무 · GA</span></label>
           <label class="opt"><input type="radio" name="role" value="팀장"><span>팀장</span></label>
-          <label class="opt"><input type="radio" name="role" value="동호회 총무·회장"><span>동호회 총무 · 회장</span></label>
+          <label class="opt"><input type="radio" name="role" value="동호회 총무/회장"><span>동호회 총무 · 회장</span></label>
           <label class="opt"><input type="radio" name="role" value="기타"><span>기타</span></label>
         </div>
       </div>
@@ -188,7 +188,7 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
           <label class="opt box"><input type="checkbox" name="source" value="네이버·인스타 검색"><span>네이버 · 인스타 검색</span></label>
           <label class="opt box"><input type="checkbox" name="source" value="지인·직원 추천"><span>지인 · 직원 추천</span></label>
           <label class="opt box"><input type="checkbox" name="source" value="전에 갔던 곳"><span>전에 갔던 곳</span></label>
-          <label class="opt box"><input type="checkbox" name="source" value="위버 등 플랫폼"><span>위버 등 플랫폼</span></label>
+          <label class="opt box"><input type="checkbox" name="source" value="취미 플랫폼"><span>위버 등 취미 플랫폼</span></label>
           <label class="opt box"><input type="checkbox" name="source" value="직원들이 알아서"><span>직원들이 알아서</span></label>
           <label class="opt box"><input type="checkbox" name="source" value="기타"><span>기타</span></label>
         </div>
@@ -212,11 +212,11 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
         <div class="opts two">
           <label class="opt"><input type="radio" name="pain" value="업체 찾기"><span>업체 찾기</span></label>
           <label class="opt"><input type="radio" name="pain" value="견적 비교"><span>견적 비교</span></label>
-          <label class="opt"><input type="radio" name="pain" value="결재·승인"><span>결재 · 승인</span></label>
+          <label class="opt"><input type="radio" name="pain" value="결재 승인"><span>결재 · 승인</span></label>
           <label class="opt"><input type="radio" name="pain" value="일정 조율"><span>일정 조율</span></label>
           <label class="opt"><input type="radio" name="pain" value="식당 예약"><span>식당 예약</span></label>
-          <label class="opt"><input type="radio" name="pain" value="증빙·정산"><span>증빙 · 정산</span></label>
-          <label class="opt"><input type="radio" name="pain" value="참여 독려"><span>참여 독려</span></label>
+          <label class="opt"><input type="radio" name="pain" value="증빙 정산"><span>증빙 · 정산</span></label>
+          <label class="opt"><input type="radio" name="pain" value="참여 득려"><span>참여 독려</span></label>
         </div>
       </div>
 
@@ -224,7 +224,7 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
         <span class="tag">08</span>
         <h2>업체를 최종적으로 정하는 사람은 누구인가요?</h2>
         <div class="opts two">
-          <label class="opt"><input type="radio" name="decider" value="HR·총무"><span>HR · 총무</span></label>
+          <label class="opt"><input type="radio" name="decider" value="HR/총무"><span>HR · 총무</span></label>
           <label class="opt"><input type="radio" name="decider" value="팀장"><span>팀장</span></label>
           <label class="opt"><input type="radio" name="decider" value="동호회에서 알아서"><span>동호회에서 알아서</span></label>
           <label class="opt"><input type="radio" name="decider" value="매번 다름"><span>매번 다름</span></label>
@@ -327,11 +327,15 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
      Google Form의 formResponse 주소와 문항별 entry ID를 넣으면 이 페이지의 답이 그 폼으로 들어간다.
      비어 있으면 메일로 보내기로 대신한다. (entry ID는 폼 만든 뒤 채운다) */
   var GFORM = {
-    action: "",
+    action: "https://docs.google.com/forms/d/e/1FAIpQLSf9ItOcZlyhYGk38f-Une2VR9bS-E864HA3f9V3Zq1SKwjxdg/formResponse",
     entries: {
-      size: "", role: "", budget: "", freq: "", source: "", hours: "", pain: "",
-      decider: "", wish: "", report: "", interest: "", free: "", email: "", note: ""
-    }
+      size: "entry.1870326019", role: "entry.674163645", budget: "entry.936733946", freq: "entry.1084353626",
+      source: "entry.635641346", hours: "entry.1897509370", pain: "entry.658833781", decider: "entry.50928282",
+      wish: "entry.1479003923", report: "entry.2141283513", interest: "entry.268864748", free: "entry.156841181",
+      email: "entry.285730975", note: "entry.263835655"
+    },
+    // "기타" 선택지가 있는 문항 — 값 "기타"는 폼의 '기타' 칸으로 보낸다
+    others: { role: 1, budget: 1, source: 1, decider: 1, wish: 1 }
   };
   var TO = "biene2024@gmail.com";
 
@@ -417,9 +421,13 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
     if (GFORM.action) {
       // Google Form은 CORS 응답을 주지 않으므로 no-cors로 던지고 성공으로 간주한다
       var body = new URLSearchParams();
+      if (!data.email.length) data.email = ["미기재"];   // 폼에서 이메일이 필수라 비우면 거절된다 — 폼을 선택으로 바꾸면 이 줄은 지운다
       Object.keys(GFORM.entries).forEach(function (k) {
         var id = GFORM.entries[k]; if (!id) return;
-        data[k].forEach(function (v) { body.append(id, v); });
+        data[k].forEach(function (v) {
+          if (v === "기타" && GFORM.others[k]) { body.append(id, "__other_option__"); body.append(id + ".other_option_response", "기타"); }
+          else body.append(id, v);
+        });
       });
       fetch(GFORM.action, { method: "POST", mode: "no-cors", body: body })
         .then(function () { finish(false); }, function () { mailFallback(data); });
