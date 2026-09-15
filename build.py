@@ -9,12 +9,28 @@ import base64
 import pathlib
 import re
 import shutil
+import sys
 
 HERE = pathlib.Path(__file__).parent
 IMG = HERE / "img"
 DOCS = HERE / "docs"
-src = (HERE / "index.src.html").read_text(encoding="utf-8")
 PLACEHOLDER = re.compile(r"__IMG:([\w-]+)__")
+
+# 시안 등 다른 파일: `python build.py 시안.html` → 시안.built.html (data URI만 삽입)
+if len(sys.argv) > 1:
+    for arg in sys.argv[1:]:
+        f = pathlib.Path(arg)
+        out = f.with_name(f.stem + ".built.html")
+        cache_: dict[str, str] = {}
+        def _uri(name: str) -> str:
+            if name not in cache_:
+                cache_[name] = "data:image/webp;base64," + base64.b64encode((IMG / f"{name}.webp").read_bytes()).decode()
+            return cache_[name]
+        out.write_text(PLACEHOLDER.sub(lambda m: _uri(m.group(1)), f.read_text(encoding="utf-8")), encoding="utf-8")
+        print(f"{out.name} {out.stat().st_size / 1024:.0f} KB")
+    sys.exit(0)
+
+src = (HERE / "index.src.html").read_text(encoding="utf-8")
 
 # ── 1. 아티팩트용: data URI 삽입 ─────────────────────────────
 cache: dict[str, str] = {}

@@ -1,7 +1,7 @@
 <title>모두의 취미</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800;900&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800;900&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@700&display=swap">
 <style>
 /* ── tokens ─────────────────────────────────────────────
    accent 는 "면·버튼 배경"에만, accent-text 는 "글자"에만.
@@ -43,6 +43,7 @@
   --sans:"Pretendard","Noto Sans KR",-apple-system,BlinkMacSystemFont,
          "Apple SD Gothic Neo","Malgun Gothic","맑은 고딕","Segoe UI",sans-serif;
   --mono:ui-monospace,"SFMono-Regular","Cascadia Mono","Consolas","D2Coding",monospace;
+  --serif:"Noto Serif KR","Apple Myungjo","Batang",serif;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
@@ -337,28 +338,48 @@ section{padding-block:var(--s8)}
 .honest p{font-size:.95rem;color:var(--dark-ink-2);padding-left:1.1rem;position:relative}
 .honest p::before{content:"";position:absolute;left:0;top:.7em;width:.4rem;height:.4rem;border-radius:2px;background:var(--dark-accent)}
 
-/* 보고서 목업 */
-.report{
-  background:var(--dark-2);border:1px solid var(--dark-line);border-radius:var(--r-xl);
-  padding:var(--s5);box-shadow:0 30px 60px rgba(0,0,0,.35);
+/* 보고서 목업 — 다크 밴드 위의 "종이 한 장". 종이는 테마와 무관하게 흰색이므로 색을 고정한다 */
+.page{
+  background:#FFFFFF;color:#1B1815;border-radius:4px;
+  box-shadow:0 30px 70px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.3);
+  padding:1.6rem 1.7rem 1.3rem;display:grid;gap:1rem;font-size:.9rem;line-height:1.5;margin:0;
 }
-.report-head{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);padding-bottom:var(--s4);border-bottom:1px solid var(--dark-line)}
-.report-head b{font-family:var(--display);font-size:1.05rem;color:var(--dark-ink)}
-.report-head span{font-size:.8rem;color:var(--dark-ink-2);border:1px solid var(--dark-line);border-radius:var(--pill);padding:.15rem .6rem}
-.report-sum{padding-block:var(--s4);font-size:.98rem;color:var(--dark-ink);line-height:1.6}
-.report-sum em{font-style:normal;color:var(--dark-accent);font-weight:700}
-.metrics{list-style:none;margin:0;padding:0;display:grid;gap:.85rem}
-.metrics li{display:grid;grid-template-columns:8.5rem 1fr 3.4rem;gap:var(--s3);align-items:center;font-size:.9rem}
-.metrics .nm{color:var(--dark-ink);font-weight:600}
-.metrics .bar{height:.55rem;border-radius:var(--pill);background:var(--dark-line);position:relative;overflow:hidden}
-.metrics .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:var(--pill);background:var(--dark-ink-2);opacity:.45}
-.metrics .bar b{position:absolute;left:0;top:0;bottom:0;border-radius:var(--pill);background:var(--dark-accent)}
-.metrics .d{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--dark-accent);font-weight:700}
-.report-foot{margin-top:var(--s4);padding-top:var(--s4);border-top:1px solid var(--dark-line);font-size:.82rem;color:var(--dark-ink-2);display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap}
-.report-legend{display:flex;gap:var(--s3)}
-.report-legend span{display:inline-flex;align-items:center;gap:.35rem}
-.report-legend i{width:.8rem;height:.45rem;border-radius:var(--pill);background:var(--dark-ink-2);opacity:.45}
-.report-legend b{width:.8rem;height:.45rem;border-radius:var(--pill);background:var(--dark-accent)}
+.p-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-bottom:.55rem;border-bottom:2px solid #1B1815}
+.p-head .id{font-size:.72rem;color:#847C74;font-weight:600;letter-spacing:.02em}
+.p-head .id b{display:block;color:#1B1815;font-weight:700;font-size:.82rem;letter-spacing:0}
+.p-head .conf{font-size:.64rem;letter-spacing:.18em;font-weight:700;color:#C24A14;border:1.5px solid #C24A14;padding:.15rem .5rem;border-radius:3px;white-space:nowrap}
+.p-title{font-family:var(--serif);font-weight:700;font-size:1.22rem;line-height:1.45;letter-spacing:-.01em;text-wrap:pretty;color:#1B1815}
+.p-title em{font-style:normal;color:#C24A14}
+.p-sub{font-size:.76rem;color:#847C74;margin-top:-.55rem}
+.p-h{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#847C74;font-weight:700;padding-bottom:.3rem;border-bottom:1px solid #ECE6DE;margin-bottom:.7rem;display:flex;justify-content:space-between}
+.p-h span{letter-spacing:0;text-transform:none;font-weight:500}
+.chart{display:grid;gap:.7rem}
+.chart .row{display:grid;grid-template-columns:6.6rem 1fr 3rem;gap:.6rem;align-items:center}
+.chart .nm{font-weight:600;font-size:.8rem}
+.chart .bars{display:grid;gap:.2rem}
+.chart .bar{height:.62rem;position:relative;background:#F1ECE4;border-radius:2px}
+.chart .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:2px;background:#B9B0A6}
+.chart .bar.after i{background:#1E3A5F}
+.chart .bar.after.big i{background:#C24A14}
+.chart .bar b{position:absolute;left:calc(var(--w) + .35rem);top:-.2rem;font-size:.64rem;font-weight:600;color:#4F4944;font-variant-numeric:tabular-nums}
+.chart .d{text-align:right;font-family:var(--display);font-weight:900;font-size:.98rem;font-variant-numeric:tabular-nums;color:#1E3A5F}
+.chart .d.big{color:#C24A14}
+.chart .d.flat{color:#847C74}
+.legend{display:flex;gap:.9rem;font-size:.68rem;color:#4F4944;margin-top:.7rem}
+.legend span{display:inline-flex;align-items:center;gap:.3rem}
+.legend i{width:.9rem;height:.45rem;border-radius:2px;background:#B9B0A6}
+.legend i.a{background:#1E3A5F}.legend i.c{background:#C24A14}
+.pts{list-style:none;margin:0;padding:0;display:grid;gap:.45rem;counter-reset:pt}
+.pts li{display:grid;grid-template-columns:1.3rem 1fr;gap:.4rem;font-size:.8rem;color:#4F4944;line-height:1.45}
+.pts li::before{counter-increment:pt;content:counter(pt);font-family:var(--display);font-weight:900;color:#C24A14;font-size:.9rem;line-height:1.35}
+.pts b{color:#1B1815}
+.next{margin-top:.8rem;background:#F7F4EF;border-left:3px solid #C24A14;padding:.55rem .8rem;font-size:.78rem;color:#4F4944;line-height:1.45}
+.next b{display:block;color:#1B1815;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.15rem}
+.p-foot{display:grid;grid-template-columns:1fr auto;gap:.3rem .8rem;padding-top:.6rem;border-top:1px solid #ECE6DE;font-size:.64rem;color:#847C74;line-height:1.45}
+.p-foot .src{grid-column:1/-1}
+.p-foot .brand{display:flex;align-items:center;gap:.35rem;font-family:var(--display);font-weight:900;color:#1B1815;font-size:.74rem}
+.p-foot .brand::before{content:"";width:8px;height:8px;border-radius:99px;background:#E8632B}
+.p-foot .pg{text-align:right;white-space:nowrap}
 
 /* ── 창업자 ───────────────────────────────────────────── */
 .founder{display:grid;gap:var(--s7);align-items:center}
@@ -538,6 +559,33 @@ fieldset{border:0;padding:0;margin:0;min-width:0}
 .qshare .lbl{width:100%;font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:.1rem}
 .qshare .btn svg{flex:none}
 .qshare .copied{width:100%}
+/* 동호회 제안서 — 사진 3장이 들어간 한 장짜리 카드. 문서라서 색을 고정한다 */
+.prop{background:#FFFFFF;color:#1B1815;border:1px solid #ECE6DE;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 12px 36px rgba(27,24,21,.12)}
+.pr-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.9rem 1.4rem;border-bottom:1px solid #ECE6DE}
+.pr-head .brand{display:flex;align-items:center;gap:.4rem;font-family:var(--display);font-weight:900;font-size:1rem;letter-spacing:-.02em;color:#1B1815}
+.pr-head .brand::before{content:"";width:11px;height:11px;border-radius:99px;background:#E8632B}
+.pr-head .kind{font-size:.74rem;font-weight:700;letter-spacing:.06em;color:#C24A14;background:#FDE6D8;border-radius:99px;padding:.2rem .7rem;white-space:nowrap}
+.pr-photos{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:3px;background:#ECE6DE}
+.pr-photos figure{margin:0;position:relative;aspect-ratio:4/3;overflow:hidden;background:#F7F4EF}
+.pr-photos img{display:block;width:100%;height:100%;object-fit:cover}
+.pr-photos figcaption{position:absolute;left:.6rem;bottom:.6rem;background:rgba(20,22,27,.72);color:#fff;font-size:.72rem;font-weight:600;padding:.18rem .6rem;border-radius:99px}
+.pr-photos figure:first-child figcaption{font-size:.82rem;background:#C24A14}
+.pr-body{padding:1.3rem 1.4rem 1.1rem;display:grid;gap:1rem}
+.pr-title{font-family:var(--display);font-weight:900;font-size:1.55rem;letter-spacing:-.03em;line-height:1.2;margin:0;color:#1B1815}
+.pr-title small{display:block;font-family:var(--sans);font-weight:600;font-size:.82rem;color:#847C74;letter-spacing:0;margin-bottom:.2rem}
+.pr-why{font-size:.9rem;color:#4F4944;line-height:1.55}
+.pr-why b{color:#1B1815}
+.pr-facts{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem .9rem;padding:.9rem 0;border-block:1px solid #ECE6DE}
+@media (min-width:600px){.pr-facts{grid-template-columns:repeat(4,1fr)}}
+.pr-facts div{font-size:.72rem;color:#847C74;font-weight:600}
+.pr-facts b{display:block;color:#1B1815;font-size:.95rem;font-weight:700;margin-top:.1rem;letter-spacing:-.01em}
+.pr-alt{font-size:.82rem;color:#4F4944}
+.pr-alt b{color:#1B1815}
+.pr-run{font-size:.84rem;color:#4F4944;background:#F7F4EF;border-radius:10px;padding:.7rem .9rem;line-height:1.5}
+.pr-run b{color:#C24A14}
+.pr-foot{display:flex;justify-content:space-between;gap:.6rem 1rem;flex-wrap:wrap;padding:.8rem 1.4rem;background:#1B1815;color:#B3ACA3;font-size:.74rem}
+.pr-foot b{color:#F3EFE9;font-weight:700}
+.pr-foot a{color:#F5A876;text-decoration:none;font-weight:600}
 .qrestart{font:inherit;font-weight:600;font-size:.92rem;color:var(--ink-3);background:none;border:0;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px}
 .qrestart:hover{color:var(--ink)}
 .qcardout{background:var(--surface);border:2px solid var(--accent);border-radius:var(--r-xl);padding:clamp(var(--s5),4vw,var(--s7));box-shadow:var(--shadow)}
@@ -898,27 +946,42 @@ footer b{color:var(--ink-2);font-weight:700}
           </div>
         </div>
 
-        <!-- 보고서 목업 — 수치는 형식을 보여주기 위한 예시 -->
-        <figure class="report" style="margin:0" aria-label="효과 보고서 예시">
-          <div class="report-head">
-            <b>활동 효과 보고서</b>
-            <span>예시 · 개발팀 12명 · 쿠킹 클래스</span>
+        <!-- 보고서 목업 — 수치는 형식을 보여주기 위한 예시. 결론이 제목 → 근거 차트 → 시사점 → 다음 행동 → 출처 -->
+        <article class="page" aria-label="활동 효과 보고서 예시">
+          <header class="p-head">
+            <span class="id"><b>활동 효과 보고서</b>개발팀 12명 · 쿠킹 클래스 · 2026. 8</span>
+            <span class="conf">CONFIDENTIAL</span>
+          </header>
+          <h3 class="p-title">한 달 뒤에도 부서 간 새 연결 <em>5건</em>이 남았다. 소속감은 올랐고, 몰입은 참고 수준의 변화에 그쳤다.</h3>
+          <p class="p-sub">설문 3회 · 활동 2주 전 → 5주 후 · 100점 척도 · 팀 단위 집계</p>
+
+          <div>
+            <div class="p-h">지표별 변화 <span>활동 전 → 한 달 뒤</span></div>
+            <div class="chart">
+              <div class="row"><span class="nm">서로 아는 정도</span><span class="bars"><span class="bar" style="--w:42%"><i style="width:42%"></i><b>42</b></span><span class="bar after big" style="--w:71%"><i style="width:71%"></i><b>71</b></span></span><span class="d big">+29</span></div>
+              <div class="row"><span class="nm">다른 팀에 말 걸기</span><span class="bars"><span class="bar" style="--w:35%"><i style="width:35%"></i><b>35</b></span><span class="bar after big" style="--w:63%"><i style="width:63%"></i><b>63</b></span></span><span class="d big">+28</span></div>
+              <div class="row"><span class="nm">팀 소속감</span><span class="bars"><span class="bar" style="--w:58%"><i style="width:58%"></i><b>58</b></span><span class="bar after" style="--w:74%"><i style="width:74%"></i><b>74</b></span></span><span class="d">+16</span></div>
+              <div class="row"><span class="nm">일에 대한 몰입</span><span class="bars"><span class="bar" style="--w:61%"><i style="width:61%"></i><b>61</b></span><span class="bar after" style="--w:66%"><i style="width:66%"></i><b>66</b></span></span><span class="d flat">+5</span></div>
+            </div>
+            <div class="legend"><span><i></i>활동 전</span><span><i class="a"></i>한 달 뒤</span><span><i class="c"></i>의미 있는 변화</span></div>
           </div>
-          <p class="report-sum">
-            한 달 뒤에도 <em>부서 간 새 연결 5건</em>이 유지됐습니다.
-            소속감은 올랐고, 몰입은 참고 수준의 변화였습니다.
-          </p>
-          <ul class="metrics">
-            <li><span class="nm">서로 아는 정도</span><span class="bar"><i style="width:42%"></i><b style="width:71%"></b></span><span class="d">+29</span></li>
-            <li><span class="nm">팀 소속감</span><span class="bar"><i style="width:58%"></i><b style="width:74%"></b></span><span class="d">+16</span></li>
-            <li><span class="nm">일에 대한 몰입</span><span class="bar"><i style="width:61%"></i><b style="width:66%"></b></span><span class="d">+5</span></li>
-            <li><span class="nm">다른 팀에 말 걸기</span><span class="bar"><i style="width:35%"></i><b style="width:63%"></b></span><span class="d">+28</span></li>
-          </ul>
-          <figcaption class="report-foot">
-            <span class="report-legend"><span><i></i>활동 전</span><span><b></b>한 달 뒤</span></span>
-            <span>응답 11/12 · 100점 척도 · 예시 수치</span>
-          </figcaption>
-        </figure>
+
+          <div>
+            <div class="p-h">핵심 시사점</div>
+            <ol class="pts">
+              <li><b>연결 지표 두 개가 가장 크게 움직였다.</b> 부서를 섞어 2인 1조로 편성한 설계가 의도대로 작동했다.</li>
+              <li><b>소속감 상승은 한 달 뒤에도 유지됐다.</b> 직후 설문(81)보다 낮지만 활동 전보다 높은 수준에서 안착.</li>
+              <li><b>몰입은 이번 활동의 목표가 아니었다.</b> +5는 참고만. 응답 11/12로 표본이 작다.</li>
+            </ol>
+            <div class="next"><b>다음 활동 제안</b>연결이 생긴 조 구성을 유지한 채 6~8주 뒤 두 번째 활동. 응답이 없던 1명은 따로 확인.</div>
+          </div>
+
+          <footer class="p-foot">
+            <span class="src">출처: 참가자 설문 3회, 응답 11/12. 개인 응답은 공개하지 않고 팀 단위로만 집계, 5명 미만 조는 분리하지 않음. 본 문서의 수치는 형식을 보여주기 위한 예시.</span>
+            <span class="brand">모두의 취미</span>
+            <span class="pg">내부 보고용 · 1 / 1</span>
+          </footer>
+        </article>
       </div>
     </div>
   </section>
@@ -1306,14 +1369,38 @@ footer b{color:var(--ink-2);font-weight:700}
           <div class="result" id="q-slipwrap" hidden style="margin-top:var(--s6)">
             <div class="result-inner">
               <h3>동호회 제안서가 준비됐어요</h3>
-              <pre class="slip" id="q-slip"></pre>
+              <article class="prop" id="q-prop" aria-label="사내 동호회 제안서">
+                <header class="pr-head">
+                  <span class="brand">모두의 취미</span>
+                  <span class="kind">사내 동호회 제안</span>
+                </header>
+                <div class="pr-photos" id="q-prop-photos"></div>
+                <div class="pr-body">
+                  <h4 class="pr-title"><small>제안 모임</small><span id="q-prop-name"></span></h4>
+                  <p class="pr-why" id="q-prop-why"></p>
+                  <div class="pr-facts">
+                    <div>예상 인원<b>10명 내외</b></div>
+                    <div>주기<b>월 1회 · 평일 저녁</b></div>
+                    <div>예상 비용<b>1인 5~7만원</b></div>
+                    <div>포함<b>활동 + 식사</b></div>
+                  </div>
+                  <p class="pr-alt"><b>대안</b> <span id="q-prop-alt"></span> — 같은 성향에서 다음으로 잘 맞는 두 가지입니다.</p>
+                  <p class="pr-run"><b>진행은 모두의 취미가 대행합니다.</b> 업체 섭외 · 견적 · 일정 조율 · 세금계산서 증빙까지. 조건만 보내면 24시간 안에 제안 3개가 옵니다.</p>
+                </div>
+                <footer class="pr-foot">
+                  <span><b>모두의 취미</b> · 팀·동호회 활동, 조건만 보내면 24시간 안에</span>
+                  <span><a id="q-prop-site" href="#" target="_blank" rel="noopener"></a> · <span id="q-prop-mail"></span></span>
+                </footer>
+              </article>
+              <pre class="slip" id="q-slip" hidden></pre>
               <div class="actions">
                 <a class="btn btn-primary" id="q-mail" href="#">메일로 보내기</a>
-                <button class="btn btn-soft" type="button" id="q-copy">복사하기</button>
+                <button class="btn btn-soft" type="button" id="q-propimg">이미지로 저장</button>
+                <button class="btn btn-soft" type="button" id="q-copy">글로 복사</button>
                 <span class="copied" id="q-copied" hidden>복사했습니다</span>
               </div>
               <p class="qnote" style="border:0;padding:0;margin-top:var(--s4)">
-                회사 HR·총무 담당자에게 그대로 보내시면 됩니다.
+                회사 HR·총무 담당자에게 그대로 보내시면 됩니다. 메일과 복사는 글 버전, 이미지는 위 카드 그대로 나갑니다.
               </p>
             </div>
           </div>
@@ -1812,34 +1899,187 @@ footer b{color:var(--ink-2);font-weight:700}
   var slip     = document.getElementById("q-slip");
   var qmail    = document.getElementById("q-mail");
   var qcopied  = document.getElementById("q-copied");
+  var TO       = "biene2024@gmail.com";
 
-  document.getElementById("q-propose").addEventListener("click", function () {
-    if (!state) return;
-    var names = state.top.slice(0, 3).map(function (h) { return h.name; });
-    var L = [
-      "사내 동호회 제안",
-      "───────────────────────",
-      "제안 모임   " + names[0],
-      "대안        " + names[1] + " / " + names[2],
+  /* 취미 → 사진. 정확히 맞는 사진이 없으면 같은 계열의 사진을 쓴다 */
+  var PHOTOS = {
+    "climbing-gym": "__IMG:climbing-gym__", "cooking-class": "__IMG:cooking-class__",
+    "outdoor-yoga": "__IMG:outdoor-yoga__", "escape-room": "__IMG:escape-room__",
+    "flower-class": "__IMG:flower-class__", "personal-color-fans": "__IMG:personal-color-fans__",
+    "running-crew": "__IMG:running-crew__", "pottery": "__IMG:pottery__",
+    "wine-tasting": "__IMG:wine-tasting__", "bowling": "__IMG:bowling__"
+  };
+  var PHOTO_OF = {
+    "클라이밍": "climbing-gym", "쿠킹 클래스": "cooking-class", "베이킹": "cooking-class", "커피 클래스": "cooking-class",
+    "와인 테이스팅": "wine-tasting", "요가·필라테스": "outdoor-yoga", "사진": "outdoor-yoga",
+    "러닝크루": "running-crew", "등산·트레킹": "running-crew", "자전거·라이딩": "running-crew",
+    "풋살·축구": "running-crew", "테니스": "running-crew", "배드민턴": "running-crew",
+    "방탈출": "escape-room", "보드게임": "escape-room", "볼링": "bowling",
+    "도예": "pottery", "목공·소품 만들기": "pottery", "가죽공예": "pottery", "향수 만들기": "pottery",
+    "드로잉": "pottery", "캘리그라피": "pottery", "플라워": "flower-class", "퍼스널컬러": "personal-color-fans"
+  };
+  function photoOf(name) { return PHOTOS[PHOTO_OF[name] || "cooking-class"]; }
+
+  var prop = { names: [], why: "" };
+
+  function proposalText() {
+    return [
+      "모두의 취미 · 사내 동호회 제안",
+      "─────────────────────────",
+      "제안 모임   " + prop.names[0],
+      "대안        " + prop.names[1] + " / " + prop.names[2],
       "예상 인원   10명 내외",
       "주기        월 1회 · 평일 저녁",
       "예상 비용   1인 5~7만원 (활동 + 식사)",
-      "───────────────────────",
-      "업체 섭외·견적·일정 조율·증빙은",
-      "모두의 취미가 대행합니다.",
-      "조건만 보내면 24시간 안에 제안 3개가 옵니다."
-    ];
-    var text = L.join("\n");
+      "─────────────────────────",
+      "왜 이 모임인가: " + prop.why,
+      "",
+      "업체 섭외·견적·일정 조율·증빙은 모두의 취미가 대행합니다.",
+      "조건만 보내면 24시간 안에 제안 3개가 옵니다.",
+      "",
+      "모두의 취미 — 팀·동호회 활동, 조건만 보내면 24시간 안에",
+      SITE,
+      "문의 " + TO
+    ].join("\n");
+  }
+
+  document.getElementById("q-propose").addEventListener("click", function () {
+    if (!state) return;
+    prop.names = state.top.slice(0, 3).map(function (h) { return h.name; });
+    prop.why = state.type[1] + " 첫 모임은 초보도 부담 없는 원데이로 시작해 반응을 보고 정기 모임으로 갑니다.";
+
+    document.getElementById("q-prop-name").textContent = prop.names[0] + " 동호회";
+    var why = document.getElementById("q-prop-why");
+    why.textContent = "";
+    why.appendChild(document.createTextNode("무료 취미 진단에서 "));
+    var b = document.createElement("b"); b.textContent = state.type[0]; why.appendChild(b);
+    why.appendChild(document.createTextNode(" 성향이 나왔습니다 — " + prop.why));
+    document.getElementById("q-prop-alt").textContent = prop.names[1] + " · " + prop.names[2];
+    var site = document.getElementById("q-prop-site");
+    site.textContent = SITE.replace("https://", "").replace(/\/$/, ""); site.href = SITE;
+    document.getElementById("q-prop-mail").textContent = TO;
+
+    var ph = document.getElementById("q-prop-photos");
+    ph.innerHTML = "";
+    prop.names.forEach(function (n, i) {
+      var fg = document.createElement("figure");
+      var im = document.createElement("img"); im.src = photoOf(n); im.alt = n + " 활동 사진";
+      var cap = document.createElement("figcaption"); cap.textContent = i ? "대안 · " + n : n;
+      fg.appendChild(im); fg.appendChild(cap); ph.appendChild(fg);
+    });
+
+    var text = proposalText();
     slip.textContent = text;
-    qmail.href = "mailto:?subject=" + encodeURIComponent("[동호회 제안] " + names[0])
+    qmail.href = "mailto:?subject=" + encodeURIComponent("[동호회 제안] " + prop.names[0] + " — 모두의 취미")
                + "&body=" + encodeURIComponent(text);
     slipWrap.hidden = false;
-    slipWrap.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    slipWrap.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  });
+
+  /* 제안서 이미지 — 1080×1350 */
+  function loadImg(src) {
+    return new Promise(function (res) { var im = new Image(); im.onload = function () { res(im); }; im.onerror = function () { res(null); }; im.src = src; });
+  }
+  function cover(ctx, im, x, y, w, h) {
+    if (!im) { ctx.fillStyle = "#F1ECE4"; ctx.fillRect(x, y, w, h); return; }
+    var r = Math.max(w / im.width, h / im.height), sw = w / r, sh = h / r;
+    ctx.drawImage(im, (im.width - sw) / 2, (im.height - sh) / 2, sw, sh, x, y, w, h);
+  }
+  function pill(ctx, text, x, y, bg, fg, size) {
+    ctx.font = "700 " + size + "px " + "'Pretendard','Noto Sans KR',sans-serif";
+    var w = ctx.measureText(text).width + size * 1.2, h = size * 1.7;
+    ctx.fillStyle = bg; roundRect(ctx, x, y, w, h, h / 2); ctx.fill();
+    ctx.fillStyle = fg; ctx.textBaseline = "middle"; ctx.fillText(text, x + size * .6, y + h / 2); ctx.textBaseline = "alphabetic";
+  }
+  function drawProposal(done) {
+    var W = 1080, H = 1350, P = 72;
+    var c = document.createElement("canvas"); c.width = W; c.height = H;
+    var ctx = c.getContext("2d");
+    var disp = "'Gothic A1','Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif";
+    var sans = "'Pretendard','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif";
+    var ACC = "#C24A14", INK = "#1B1815", INK2 = "#4F4944", INK3 = "#847C74", LINE = "#ECE6DE";
+    var srcs = prop.names.map(photoOf);
+    var fonts = (document.fonts && document.fonts.load)
+      ? Promise.all([document.fonts.load("900 60px 'Gothic A1'"), document.fonts.load("700 30px 'Noto Sans KR'")]).catch(function () {})
+      : Promise.resolve();
+    Promise.all([fonts, loadImg(srcs[0]), loadImg(srcs[1]), loadImg(srcs[2])]).then(function (r) {
+      var ims = r.slice(1);
+      ctx.fillStyle = "#FFFFFF"; ctx.fillRect(0, 0, W, H);
+      // 머리
+      ctx.fillStyle = "#E8632B"; ctx.beginPath(); ctx.arc(P + 12, 64, 12, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = INK; ctx.font = "900 34px " + disp; ctx.textBaseline = "middle"; ctx.fillText("모두의 취미", P + 38, 64);
+      ctx.textBaseline = "alphabetic";
+      ctx.font = "700 22px " + sans; var kw = ctx.measureText("사내 동호회 제안").width + 40;
+      pill(ctx, "사내 동호회 제안", W - P - kw, 46, "#FDE6D8", ACC, 22);
+      ctx.fillStyle = LINE; ctx.fillRect(0, 108, W, 2);
+      // 사진: 큰 1장 + 작은 2장
+      var py = 110, ph = 420, gap = 4, bigW = 600, smW = W - bigW - gap;
+      cover(ctx, ims[0], 0, py, bigW, ph);
+      cover(ctx, ims[1], bigW + gap, py, smW, (ph - gap) / 2);
+      cover(ctx, ims[2], bigW + gap, py + (ph + gap) / 2, smW, (ph - gap) / 2);
+      pill(ctx, prop.names[0], 20, py + ph - 58, ACC, "#fff", 24);
+      pill(ctx, "대안 · " + prop.names[1], bigW + gap + 16, py + (ph - gap) / 2 - 48, "rgba(20,22,27,.75)", "#fff", 19);
+      pill(ctx, "대안 · " + prop.names[2], bigW + gap + 16, py + ph - 48, "rgba(20,22,27,.75)", "#fff", 19);
+      // 본문
+      var y = py + ph + 70;
+      ctx.fillStyle = INK3; ctx.font = "600 22px " + sans; ctx.fillText("제안 모임", P, y); y += 62;
+      ctx.fillStyle = INK; ctx.font = "900 60px " + disp; ctx.fillText(prop.names[0] + " 동호회", P, y); y += 50;
+      ctx.fillStyle = INK2; ctx.font = "400 27px " + sans;
+      var whyText = "무료 취미 진단에서 " + state.type[0] + " 성향이 나왔습니다 — " + prop.why;
+      wrap(ctx, whyText, W - P * 2).slice(0, 4).forEach(function (l) { ctx.fillText(l, P, y); y += 40; });
+      y += 24;
+      ctx.fillStyle = LINE; ctx.fillRect(P, y, W - P * 2, 2); y += 44;
+      var facts = [["예상 인원", "10명 내외"], ["주기", "월 1회 · 평일 저녁"], ["예상 비용", "1인 5~7만원"], ["포함", "활동 + 식사"]];
+      var cw = (W - P * 2) / 4;
+      facts.forEach(function (f, i) {
+        ctx.fillStyle = INK3; ctx.font = "600 20px " + sans; ctx.fillText(f[0], P + cw * i, y);
+        ctx.fillStyle = INK; ctx.font = "700 27px " + sans; ctx.fillText(f[1], P + cw * i, y + 38);
+      });
+      y += 72; ctx.fillStyle = LINE; ctx.fillRect(P, y, W - P * 2, 2); y += 46;
+      ctx.fillStyle = INK; ctx.font = "700 24px " + sans; ctx.fillText("대안", P, y);
+      ctx.fillStyle = INK2; ctx.font = "400 24px " + sans; ctx.fillText(prop.names[1] + " · " + prop.names[2] + " — 같은 성향에서 다음으로 잘 맞는 두 가지", P + 64, y);
+      y += 40;
+      ctx.fillStyle = "#F7F4EF"; roundRect(ctx, P, y, W - P * 2, 104, 14); ctx.fill();
+      ctx.fillStyle = ACC; ctx.font = "700 24px " + sans; ctx.fillText("진행은 모두의 취미가 대행합니다.", P + 26, y + 42);
+      ctx.fillStyle = INK2; ctx.font = "400 22px " + sans; ctx.fillText("업체 섭외 · 견적 · 일정 조율 · 증빙까지. 조건만 보내면 24시간 안에 제안 3개가 옵니다.", P + 26, y + 78);
+      // 꼬리
+      ctx.fillStyle = INK; ctx.fillRect(0, H - 120, W, 120);
+      ctx.fillStyle = "#F3EFE9"; ctx.font = "700 24px " + sans; ctx.fillText("모두의 취미", P, H - 70);
+      ctx.fillStyle = "#B3ACA3"; ctx.font = "400 22px " + sans; ctx.fillText("팀·동호회 활동, 조건만 보내면 24시간 안에", P + 150, H - 70);
+      ctx.fillStyle = "#F5A876"; ctx.font = "600 22px " + sans; ctx.fillText(SITE.replace("https://", "").replace(/\/$/, "") + "  ·  " + TO, P, H - 32);
+      done(c);
+    });
+  }
+  function saveCanvas(c, filename) {
+    c.toBlob(function (blob) {
+      var file = new File([blob], filename, { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], title: "모두의 취미 · 동호회 제안서" }).then(function () { qcopied.hidden = true; }, function () { qcopied.hidden = true; });
+      } else if (window.claude && window.claude.use) {
+        window.claude.use("downloads").then(function (dl) {
+          if (!dl) { sayQ("이 화면에서는 저장할 수 없어요."); return; }
+          dl.save({ filename: filename, data: blob }).then(function () { sayQ("이미지를 저장했어요."); }, function () { qcopied.hidden = true; });
+        });
+      } else {
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob); a.download = filename;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+        sayQ("이미지를 저장했어요.");
+      }
+    }, "image/png");
+  }
+  function sayQ(t) { qcopied.textContent = t; qcopied.hidden = false; setTimeout(function () { qcopied.hidden = true; }, 2200); }
+
+  document.getElementById("q-propimg").addEventListener("click", function () {
+    if (!prop.names.length) return;
+    sayQ("카드를 만드는 중…");
+    drawProposal(function (c) { saveCanvas(c, "동호회제안서-" + prop.names[0] + ".png"); });
   });
 
   document.getElementById("q-copy").addEventListener("click", function () {
     var t = slip.textContent;
-    function done() { qcopied.hidden = false; setTimeout(function () { qcopied.hidden = true; }, 1800); }
+    function done() { sayQ("글 버전을 복사했어요. 메일이나 메신저에 붙여넣으세요."); }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(t).then(done, done);
     } else {

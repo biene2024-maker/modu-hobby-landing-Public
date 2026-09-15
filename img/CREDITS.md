@@ -14,3 +14,10 @@
 - `cooking-class.webp` — https://images.unsplash.com/photo-1683624328172-88fb24625ec1
 
 원본은 1200px JPG로 받아 4:3 중앙 크롭 후 900×675 WebP(q72)로 변환했다.
+
+## Unsplash (2026-09-15 취득) — 동호회 제안서 사진용
+
+- `running-crew.webp` — https://images.unsplash.com/photo-1540539234-c14a20fb7c7b
+- `pottery.webp` — https://images.unsplash.com/photo-1609881583302-61548332039c
+- `wine-tasting.webp` — https://images.unsplash.com/photo-1510812431401-41d2bd2722f3
+- `bowling.webp` — https://images.unsplash.com/photo-1463411563105-157075b06f96
