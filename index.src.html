@@ -1905,36 +1905,38 @@ footer b{color:var(--ink-2);font-weight:700}
   var qcopied  = document.getElementById("q-copied");
   var TO       = "biene2024@gmail.com";
 
-  /* 취미 → 사진. 정확히 맞는 사진이 없으면 같은 계열의 사진을 쓴다 */
+  /* 취미 → 사진. 취미마다 제 사진이 있고, 뒤의 것은 앞 사진이 이미 쓰였을 때의 대체(같은 계열) */
+  var KEYS = ["climbing-gym","cooking-class","outdoor-yoga","escape-room","flower-class","personal-color-fans",
+              "running-crew","pottery","wine-tasting","bowling","tennis","futsal","badminton","hiking","cycling",
+              "photography","board-game","baking","coffee-class","woodworking","leather-craft","perfume","drawing","calligraphy"];
   var PHOTOS = {
-    "climbing-gym": "__IMG:climbing-gym__", "cooking-class": "__IMG:cooking-class__",
-    "outdoor-yoga": "__IMG:outdoor-yoga__", "escape-room": "__IMG:escape-room__",
-    "flower-class": "__IMG:flower-class__", "personal-color-fans": "__IMG:personal-color-fans__",
-    "running-crew": "__IMG:running-crew__", "pottery": "__IMG:pottery__",
-    "wine-tasting": "__IMG:wine-tasting__", "bowling": "__IMG:bowling__"
+    "climbing-gym": "__IMG:climbing-gym__", "cooking-class": "__IMG:cooking-class__", "outdoor-yoga": "__IMG:outdoor-yoga__",
+    "escape-room": "__IMG:escape-room__", "flower-class": "__IMG:flower-class__", "personal-color-fans": "__IMG:personal-color-fans__",
+    "running-crew": "__IMG:running-crew__", "pottery": "__IMG:pottery__", "wine-tasting": "__IMG:wine-tasting__", "bowling": "__IMG:bowling__",
+    "tennis": "__IMG:tennis__", "futsal": "__IMG:futsal__", "badminton": "__IMG:badminton__", "hiking": "__IMG:hiking__",
+    "cycling": "__IMG:cycling__", "photography": "__IMG:photography__", "board-game": "__IMG:board-game__", "baking": "__IMG:baking__",
+    "coffee-class": "__IMG:coffee-class__", "woodworking": "__IMG:woodworking__", "leather-craft": "__IMG:leather-craft__",
+    "perfume": "__IMG:perfume__", "drawing": "__IMG:drawing__", "calligraphy": "__IMG:calligraphy__"
   };
-  /* 취미 → 계열. 같은 계열 안에서 아직 안 쓴 사진을 고르므로 세 장이 겹치지 않는다 */
-  var CAT_OF = {
-    "클라이밍": "climb", "볼링": "bowl", "방탈출": "game", "보드게임": "game",
-    "쿠킹 클래스": "food", "베이킹": "food", "커피 클래스": "food", "와인 테이스팅": "wine",
-    "요가·필라테스": "yoga", "사진": "outdoor",
-    "러닝크루": "run", "등산·트레킹": "run", "자전거·라이딩": "run", "풋살·축구": "run", "테니스": "run", "배드민턴": "run",
-    "도예": "craft", "목공·소품 만들기": "craft", "가죽공예": "craft", "향수 만들기": "craft", "드로잉": "craft", "캘리그라피": "craft",
-    "플라워": "flower", "퍼스널컬러": "color"
-  };
-  var CAT_PHOTOS = {
-    climb: ["climbing-gym", "running-crew", "bowling"], bowl: ["bowling", "escape-room", "climbing-gym"],
-    game: ["escape-room", "bowling", "wine-tasting"], food: ["cooking-class", "wine-tasting", "pottery"],
-    wine: ["wine-tasting", "cooking-class", "escape-room"], yoga: ["outdoor-yoga", "running-crew", "climbing-gym"],
-    outdoor: ["outdoor-yoga", "running-crew", "climbing-gym"], run: ["running-crew", "outdoor-yoga", "climbing-gym", "bowling"],
-    craft: ["pottery", "flower-class", "personal-color-fans"], flower: ["flower-class", "pottery", "personal-color-fans"],
-    color: ["personal-color-fans", "flower-class", "pottery"]
+  var PHOTO_OF = {
+    "풋살·축구": ["futsal", "running-crew"],          "배드민턴": ["badminton", "tennis"],
+    "방탈출": ["escape-room", "board-game"],          "보드게임": ["board-game", "escape-room"],
+    "테니스": ["tennis", "badminton"],                "와인 테이스팅": ["wine-tasting", "coffee-class"],
+    "볼링": ["bowling", "escape-room"],               "쿠킹 클래스": ["cooking-class", "baking"],
+    "러닝크루": ["running-crew", "hiking"],           "등산·트레킹": ["hiking", "running-crew"],
+    "베이킹": ["baking", "cooking-class"],            "자전거·라이딩": ["cycling", "running-crew"],
+    "클라이밍": ["climbing-gym", "hiking"],           "도예": ["pottery", "woodworking"],
+    "목공·소품 만들기": ["woodworking", "leather-craft"], "가죽공예": ["leather-craft", "woodworking"],
+    "향수 만들기": ["perfume", "flower-class"],       "커피 클래스": ["coffee-class", "baking"],
+    "퍼스널컬러": ["personal-color-fans", "drawing"], "플라워": ["flower-class", "perfume"],
+    "사진": ["photography", "hiking"],                "요가·필라테스": ["outdoor-yoga", "hiking"],
+    "드로잉": ["drawing", "calligraphy"],             "캘리그라피": ["calligraphy", "drawing"]
   };
   function photosFor(names) {
     var used = {};
     return names.map(function (n) {
-      var list = CAT_PHOTOS[CAT_OF[n]] || ["cooking-class"];
-      var key = list.filter(function (k) { return !used[k]; })[0] || list[0];
+      var list = (PHOTO_OF[n] || ["cooking-class"]).concat(KEYS);   // 대체까지 다 쓰였으면 아무 안 쓴 사진
+      var key = list.filter(function (k) { return !used[k]; })[0];
       used[key] = true;
       return PHOTOS[key];
     });
