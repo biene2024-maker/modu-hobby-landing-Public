@@ -579,6 +579,7 @@ fieldset{border:0;padding:0;margin:0;min-width:0}
 .pr-head .kind{font-size:.74rem;font-weight:700;letter-spacing:.06em;color:#C24A14;background:#FDE6D8;border-radius:99px;padding:.2rem .7rem;white-space:nowrap}
 .pr-photos{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:3px;background:#ECE6DE}
 .pr-photos figure{margin:0;position:relative;aspect-ratio:4/3;overflow:hidden;background:#F7F4EF}
+.pr-photos figure:first-child{aspect-ratio:auto} /* 큰 사진은 옆 두 장의 높이를 따라간다 */
 .pr-photos img{display:block;width:100%;height:100%;object-fit:cover}
 .pr-photos figcaption{position:absolute;left:.6rem;bottom:.6rem;background:rgba(20,22,27,.72);color:#fff;font-size:.72rem;font-weight:600;padding:.18rem .6rem;border-radius:99px}
 .pr-photos figure:first-child figcaption{font-size:.82rem;background:#C24A14}
@@ -1923,18 +1924,34 @@ footer b{color:var(--ink-2);font-weight:700}
     "running-crew": "img/running-crew.webp", "pottery": "img/pottery.webp",
     "wine-tasting": "img/wine-tasting.webp", "bowling": "img/bowling.webp"
   };
-  var PHOTO_OF = {
-    "클라이밍": "climbing-gym", "쿠킹 클래스": "cooking-class", "베이킹": "cooking-class", "커피 클래스": "cooking-class",
-    "와인 테이스팅": "wine-tasting", "요가·필라테스": "outdoor-yoga", "사진": "outdoor-yoga",
-    "러닝크루": "running-crew", "등산·트레킹": "running-crew", "자전거·라이딩": "running-crew",
-    "풋살·축구": "running-crew", "테니스": "running-crew", "배드민턴": "running-crew",
-    "방탈출": "escape-room", "보드게임": "escape-room", "볼링": "bowling",
-    "도예": "pottery", "목공·소품 만들기": "pottery", "가죽공예": "pottery", "향수 만들기": "pottery",
-    "드로잉": "pottery", "캘리그라피": "pottery", "플라워": "flower-class", "퍼스널컬러": "personal-color-fans"
+  /* 취미 → 계열. 같은 계열 안에서 아직 안 쓴 사진을 고르므로 세 장이 겹치지 않는다 */
+  var CAT_OF = {
+    "클라이밍": "climb", "볼링": "bowl", "방탈출": "game", "보드게임": "game",
+    "쿠킹 클래스": "food", "베이킹": "food", "커피 클래스": "food", "와인 테이스팅": "wine",
+    "요가·필라테스": "yoga", "사진": "outdoor",
+    "러닝크루": "run", "등산·트레킹": "run", "자전거·라이딩": "run", "풋살·축구": "run", "테니스": "run", "배드민턴": "run",
+    "도예": "craft", "목공·소품 만들기": "craft", "가죽공예": "craft", "향수 만들기": "craft", "드로잉": "craft", "캘리그라피": "craft",
+    "플라워": "flower", "퍼스널컬러": "color"
   };
-  function photoOf(name) { return PHOTOS[PHOTO_OF[name] || "cooking-class"]; }
+  var CAT_PHOTOS = {
+    climb: ["climbing-gym", "running-crew", "bowling"], bowl: ["bowling", "escape-room", "climbing-gym"],
+    game: ["escape-room", "bowling", "wine-tasting"], food: ["cooking-class", "wine-tasting", "pottery"],
+    wine: ["wine-tasting", "cooking-class", "escape-room"], yoga: ["outdoor-yoga", "running-crew", "climbing-gym"],
+    outdoor: ["outdoor-yoga", "running-crew", "climbing-gym"], run: ["running-crew", "outdoor-yoga", "climbing-gym", "bowling"],
+    craft: ["pottery", "flower-class", "personal-color-fans"], flower: ["flower-class", "pottery", "personal-color-fans"],
+    color: ["personal-color-fans", "flower-class", "pottery"]
+  };
+  function photosFor(names) {
+    var used = {};
+    return names.map(function (n) {
+      var list = CAT_PHOTOS[CAT_OF[n]] || ["cooking-class"];
+      var key = list.filter(function (k) { return !used[k]; })[0] || list[0];
+      used[key] = true;
+      return PHOTOS[key];
+    });
+  }
 
-  var prop = { names: [], why: "" };
+  var prop = { names: [], why: "", photos: [] };
 
   function proposalText() {
     return [
@@ -1975,9 +1992,10 @@ footer b{color:var(--ink-2);font-weight:700}
 
     var ph = document.getElementById("q-prop-photos");
     ph.innerHTML = "";
+    prop.photos = photosFor(prop.names);
     prop.names.forEach(function (n, i) {
       var fg = document.createElement("figure");
-      var im = document.createElement("img"); im.src = photoOf(n); im.alt = n + " 활동 사진";
+      var im = document.createElement("img"); im.src = prop.photos[i]; im.alt = n + " 활동 사진";
       var cap = document.createElement("figcaption"); cap.textContent = i ? "대안 · " + n : n;
       fg.appendChild(im); fg.appendChild(cap); ph.appendChild(fg);
     });
@@ -2012,7 +2030,7 @@ footer b{color:var(--ink-2);font-weight:700}
     var disp = "'Gothic A1','Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif";
     var sans = "'Pretendard','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif";
     var ACC = "#C24A14", INK = "#1B1815", INK2 = "#4F4944", INK3 = "#847C74", LINE = "#ECE6DE";
-    var srcs = prop.names.map(photoOf);
+    var srcs = prop.photos || photosFor(prop.names);
     var fonts = (document.fonts && document.fonts.load)
       ? Promise.all([document.fonts.load("900 60px 'Gothic A1'"), document.fonts.load("700 30px 'Noto Sans KR'")]).catch(function () {})
       : Promise.resolve();
