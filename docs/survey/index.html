@@ -146,10 +146,10 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
         <span class="tag">02</span>
         <h2>어떤 역할로 답하시나요?</h2>
         <div class="opts two">
-          <label class="opt"><input type="radio" name="role" value="HR/People 팀"><span>HR · People팀</span></label>
-          <label class="opt"><input type="radio" name="role" value="총무/GA"><span>총무 · GA</span></label>
+          <label class="opt"><input type="radio" name="role" value="HR·People팀"><span>HR · People팀</span></label>
+          <label class="opt"><input type="radio" name="role" value="총무·GA"><span>총무 · GA</span></label>
           <label class="opt"><input type="radio" name="role" value="팀장"><span>팀장</span></label>
-          <label class="opt"><input type="radio" name="role" value="동호회 총무/회장"><span>동호회 총무 · 회장</span></label>
+          <label class="opt"><input type="radio" name="role" value="동호회 총무·회장"><span>동호회 총무 · 회장</span></label>
           <label class="opt"><input type="radio" name="role" value="기타"><span>기타</span></label>
         </div>
       </div>
@@ -216,7 +216,7 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
           <label class="opt"><input type="radio" name="pain" value="일정 조율"><span>일정 조율</span></label>
           <label class="opt"><input type="radio" name="pain" value="식당 예약"><span>식당 예약</span></label>
           <label class="opt"><input type="radio" name="pain" value="증빙 정산"><span>증빙 · 정산</span></label>
-          <label class="opt"><input type="radio" name="pain" value="참여 득려"><span>참여 독려</span></label>
+          <label class="opt"><input type="radio" name="pain" value="참여 독려"><span>참여 독려</span></label>
         </div>
       </div>
 
@@ -224,7 +224,7 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
         <span class="tag">08</span>
         <h2>업체를 최종적으로 정하는 사람은 누구인가요?</h2>
         <div class="opts two">
-          <label class="opt"><input type="radio" name="decider" value="HR/총무"><span>HR · 총무</span></label>
+          <label class="opt"><input type="radio" name="decider" value="HR·총무"><span>HR · 총무</span></label>
           <label class="opt"><input type="radio" name="decider" value="팀장"><span>팀장</span></label>
           <label class="opt"><input type="radio" name="decider" value="동호회에서 알아서"><span>동호회에서 알아서</span></label>
           <label class="opt"><input type="radio" name="decider" value="매번 다름"><span>매번 다름</span></label>
@@ -335,7 +335,7 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
       email: "entry.285730975", note: "entry.263835655"
     },
     // "기타" 선택지가 있는 문항 — 값 "기타"는 폼의 '기타' 칸으로 보낸다
-    others: { role: 1, budget: 1, source: 1, decider: 1, wish: 1 }
+    others: { role: 1, budget: 1, source: 1, wish: 1 }
   };
   var TO = "biene2024@gmail.com";
 
@@ -421,7 +421,6 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
     if (GFORM.action) {
       // Google Form은 CORS 응답을 주지 않으므로 no-cors로 던지고 성공으로 간주한다
       var body = new URLSearchParams();
-      if (!data.email.length) data.email = ["미기재"];   // 폼에서 이메일이 필수라 비우면 거절된다 — 폼을 선택으로 바꾸면 이 줄은 지운다
       Object.keys(GFORM.entries).forEach(function (k) {
         var id = GFORM.entries[k]; if (!id) return;
         data[k].forEach(function (v) {
