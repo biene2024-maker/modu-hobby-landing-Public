@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="팀·동호회 활동, 회사에서는 어떻게 하고 계세요? 3분 설문 — 예산·빈도·번거로운 단계·있으면 좋겠는 활동을 여쭙습니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="모두의 취미 — 3분 수요조사">
+<meta property="og:description" content="팀·동호회 활동, 회사에서는 어떻게 하고 계세요? 13문항 3분. 답해주신 분께는 다음 활동을 무료로 찾아드립니다.">
+<meta property="og:image" content="../img/cooking-class.webp">
+<meta name="theme-color" content="#C24A14">
+<meta name="robots" content="noindex">
+<title>모두의 취미 — 3분 수요조사</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800;900&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{
+  --ground:#FFFFFF; --ground-2:#F7F4EF; --surface:#FFFFFF;
+  --ink:#1B1815; --ink-2:#4F4944; --ink-3:#847C74;
+  --line:#ECE6DE; --line-strong:#D8D0C6;
+  --accent:#E8632B; --accent-soft:#FDE6D8; --accent-text:#C24A14; --accent-hover:#A93E0E; --on-accent:#FFFFFF;
+  --navy:#1E3A5F; --navy-soft:#DCE6F2;
+  --shadow:0 1px 2px rgba(27,24,21,.05), 0 10px 30px rgba(27,24,21,.07);
+  --s2:.5rem; --s3:.75rem; --s4:1rem; --s5:1.5rem; --s6:2rem; --s7:3rem; --s8:4.5rem;
+  --r:12px; --r-lg:18px; --r-xl:26px; --pill:999px;
+  --display:"Gothic A1","Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --sans:"Pretendard","Noto Sans KR",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{--ground:#15130F;--ground-2:#1B1813;--surface:#211D18;--ink:#F3EEE7;--ink-2:#B9B0A6;--ink-3:#8B837A;--line:#302A24;--line-strong:#463E35;--accent:#E8763F;--accent-soft:#3A2519;--accent-text:#F2A470;--accent-hover:#F7BA8E;--on-accent:#1A0F07;--navy:#9EB8DC;--navy-soft:#1C2A3D}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground-2);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased;padding:var(--s4) var(--s4) var(--s8)}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.25;text-wrap:balance}
+p{margin:0}
+a{color:var(--accent-text)}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--accent-text);outline-offset:3px;border-radius:6px}
+.wrap{max-width:40rem;margin-inline:auto}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);padding-block:var(--s3) var(--s5)}
+.brand{display:flex;align-items:center;gap:.5rem;font-family:var(--display);font-weight:900;font-size:1.1rem;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}
+.brand .dot{width:13px;height:13px;border-radius:var(--pill);background:var(--accent)}
+.top small{font-size:.85rem;color:var(--ink-3)}
+
+.intro{margin-bottom:var(--s5)}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;color:var(--accent-text);font-size:.92rem;font-weight:700;margin-bottom:var(--s3)}
+.eyebrow::before{content:"";width:1.4rem;height:3px;border-radius:2px;background:var(--accent)}
+.intro h1{font-size:clamp(1.7rem,5vw,2.3rem)}
+.intro p{color:var(--ink-2);margin-top:var(--s3);font-size:1.02rem}
+.intro strong{color:var(--ink)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(var(--s5),4vw,var(--s7));box-shadow:var(--shadow)}
+.progress{display:flex;align-items:center;gap:var(--s4);margin-bottom:var(--s6)}
+.count{font-family:var(--display);font-weight:900;font-size:.95rem;color:var(--ink-3);white-space:nowrap}
+.count b{color:var(--accent-text);font-size:1.25rem}
+.bar{flex:1;height:8px;border-radius:var(--pill);background:var(--ground-2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:var(--pill);background:var(--accent-text);transition:width .4s cubic-bezier(.2,.7,.3,1)}
+.stage{min-height:16rem}
+.q{display:none}
+.q.is-active{display:block}
+@media (prefers-reduced-motion:no-preference){
+  .q.is-active{animation:qin .38s cubic-bezier(.2,.7,.3,1) both}
+  .q.is-active.from-left{animation-name:qin-left}
+}
+@keyframes qin{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes qin-left{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+.q .tag{font-family:var(--display);font-size:.8rem;color:var(--accent-text);font-weight:900;letter-spacing:.04em}
+.q h2{font-size:clamp(1.2rem,2.6vw,1.5rem);margin:var(--s2) 0 var(--s2)}
+.q .hint{font-size:.92rem;color:var(--ink-3);margin-bottom:var(--s4)}
+.opts{display:grid;gap:var(--s3)}
+.opts.two{grid-template-columns:1fr 1fr}
+@media (max-width:520px){.opts.two{grid-template-columns:1fr}}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt span{display:flex;align-items:center;gap:.8rem;padding:.9rem 1.1rem;border:2px solid var(--line);border-radius:var(--r-lg);background:var(--ground-2);font-size:1rem;cursor:pointer;transition:background .16s ease,border-color .16s ease,color .16s ease,transform .16s ease}
+.opt span::before{content:"";flex:none;width:1.1rem;height:1.1rem;border-radius:var(--pill);border:2px solid var(--line-strong);background:var(--surface);transition:all .16s ease}
+.opt.box span::before{border-radius:5px}
+.opt span:hover{border-color:var(--line-strong);transform:translateY(-1px)}
+.opt input:checked + span{background:var(--accent-text);border-color:var(--accent-text);color:var(--on-accent);font-weight:600}
+.opt input:checked + span::before{border-color:var(--on-accent);background:var(--on-accent);box-shadow:inset 0 0 0 3px var(--accent-text)}
+.opt input:focus-visible + span{outline:3px solid var(--accent-text);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.opt span{transition:none}.opt span:hover{transform:none}}
+input[type=text],input[type=email],textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--ground-2);border:2px solid var(--line);border-radius:var(--r);padding:.8rem .95rem;width:100%}
+textarea{min-height:7rem;resize:vertical}
+input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
+.field{display:flex;flex-direction:column;gap:var(--s2);margin-top:var(--s4)}
+.field label{font-size:.95rem;font-weight:700}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);margin-top:var(--s6)}
+.btn{font:inherit;font-weight:700;border:2px solid transparent;border-radius:var(--pill);padding:.8rem 1.6rem;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;background:var(--accent-text);color:var(--on-accent);box-shadow:0 6px 18px rgba(194,74,20,.22)}
+.btn:hover{background:var(--accent-hover)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none}
+.back{font:inherit;font-weight:600;font-size:.95rem;color:var(--ink-3);background:none;border:0;cursor:pointer;padding:.4rem 0}
+.back:hover{color:var(--ink)}
+.back[disabled]{opacity:0;pointer-events:none}
+.note{font-size:.88rem;color:var(--ink-3)}
+
+.done{text-align:center;padding-block:var(--s6)}
+.done .big{font-family:var(--display);font-weight:900;font-size:clamp(1.6rem,4vw,2.2rem);letter-spacing:-.03em;margin-bottom:var(--s3)}
+.done .big em{font-style:normal;color:var(--accent-text)}
+.done p{color:var(--ink-2)}
+.done .btn{margin-top:var(--s5)}
+.sending{display:inline-flex;gap:.5rem;margin-bottom:var(--s4)}
+.sending i{width:.8rem;height:.8rem;border-radius:var(--pill);background:var(--accent)}
+@media (prefers-reduced-motion:no-preference){.sending i{animation:b .9s ease-in-out infinite}.sending i:nth-child(2){animation-delay:.15s}.sending i:nth-child(3){animation-delay:.3s}}
+@keyframes b{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(-.55rem);opacity:1}}
+.foot{margin-top:var(--s6);font-size:.85rem;color:var(--ink-3);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="../"><span class="dot"></span>모두의 취미</a>
+    <small>3분 · 13문항</small>
+  </div>
+
+  <div class="intro" id="intro">
+    <span class="eyebrow">수요조사</span>
+    <h1>팀·동호회 활동,<br>회사에서는 어떻게 하고 계세요?</h1>
+    <p>
+      예산은 얼마나 되는지, 얼마나 자주 하는지, 어디가 제일 번거로운지, 어떤 활동이 있으면 좋겠는지 여쭙습니다.
+      <strong>답해주신 분께는 다음 활동을 무료로 한 번 찾아드립니다.</strong> 개인 정보는 마지막에 원하시는 분만 남기시면 됩니다.
+    </p>
+  </div>
+
+  <form class="card" id="survey" novalidate>
+    <div class="progress" aria-live="polite">
+      <span class="count"><b id="cur">1</b> / 13</span>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="13" aria-valuenow="0" id="pbar"><i id="fill"></i></div>
+    </div>
+
+    <div class="stage">
+      <div class="q is-active" data-name="size">
+        <span class="tag">01</span>
+        <h2>회사 규모는 어느 정도인가요?</h2>
+        <div class="opts two">
+          <label class="opt"><input type="radio" name="size" value="50명 미만"><span>50명 미만</span></label>
+          <label class="opt"><input type="radio" name="size" value="50~100명"><span>50~100명</span></label>
+          <label class="opt"><input type="radio" name="size" value="100~300명"><span>100~300명</span></label>
+          <label class="opt"><input type="radio" name="size" value="300~1,000명"><span>300~1,000명</span></label>
+          <label class="opt"><input type="radio" name="size" value="1,000명 이상"><span>1,000명 이상</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-name="role">
+        <span class="tag">02</span>
+        <h2>어떤 역할로 답하시나요?</h2>
+        <div class="opts two">
+          <label class="opt"><input type="radio" name="role" value="HR·People팀"><span>HR · People팀</span></label>
+          <label class="opt"><input type="radio" name="role" value="총무·GA"><span>총무 · GA</span></label>
+          <label class="opt"><input type="radio" name="role" value="팀장"><span>팀장</span></label>
+          <label class="opt"><input type="radio" name="role" value="동호회 총무·회장"><span>동호회 총무 · 회장</span></label>
+          <label class="opt"><input type="radio" name="role" value="기타"><span>기타</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-name="budget">
+        <span class="tag">03</span>
+        <h2>팀·동호회 활동에 회사가 지원하는 예산은 1인당 대략 얼마인가요?</h2>
+        <p class="hint">정확하지 않아도 됩니다. 감으로요.</p>
+        <div class="opts two">
+          <label class="opt"><input type="radio" name="budget" value="지원 없음"><span>지원 없음</span></label>
+          <label class="opt"><input type="radio" name="budget" value="분기 3만원 미만"><span>분기 3만원 미만</span></label>
+          <label class="opt"><input type="radio" name="budget" value="분기 3~5만원"><span>분기 3~5만원</span></label>
+          <label class="opt"><input type="radio" name="budget" value="분기 5~10만원"><span>분기 5~10만원</span></label>
+          <label class="opt"><input type="radio" name="budget" value="분기 10만원 이상"><span>분기 10만원 이상</span></label>
+          <label class="opt"><input type="radio" name="budget" value="잘 모름"><span>잘 모름</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-name="freq">
+        <span class="tag">04</span>
+        <h2>지난 1년 동안 팀·동호회 활동을 몇 번 했나요?</h2>
+        <div class="opts two">
+          <label class="opt"><input type="radio" name="freq" value="0회"><span>0회</span></label>
+          <label class="opt"><input type="radio" name="freq" value="1~2회"><span>1~2회</span></label>
+          <label class="opt"><input type="radio" name="freq" value="3~5회"><span>3~5회</span></label>
+          <label class="opt"><input type="radio" name="freq" value="6~11회"><span>6~11회</span></label>
+          <label class="opt"><input type="radio" name="freq" value="월 1회 이상"><span>월 1회 이상</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-name="source" data-multi="1">
+        <span class="tag">05</span>
+        <h2>업체·장소는 주로 어디서 찾나요?</h2>
+        <p class="hint">여러 개 골라도 됩니다.</p>
+        <div class="opts two">
+          <label class="opt box"><input type="checkbox" name="source" value="네이버·인스타 검색"><span>네이버 · 인스타 검색</span></label>
+          <label class="opt box"><input type="checkbox" name="source" value="지인·직원 추천"><span>지인 · 직원 추천</span></label>
+          <label class="opt box"><input type="checkbox" name="source" value="전에 갔던 곳"><span>전에 갔던 곳</span></label>
+          <label class="opt box"><input type="checkbox" name="source" value="위버 등 플랫폼"><span>위버 등 플랫폼</span></label>
+          <label class="opt box"><input type="checkbox" name="source" value="직원들이 알아서"><span>직원들이 알아서</span></label>
+          <label class="opt box"><input type="checkbox" name="source" value="기타"><span>기타</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-name="hours">
+        <span class="tag">06</span>
+        <h2>활동 한 번을 준비하는 데 시간이 얼마나 드나요?</h2>
+        <p class="hint">검색 · 견적 · 일정 조율 · 증빙까지 합쳐서요.</p>
+        <div class="opts two">
+          <label class="opt"><input type="radio" name="hours" value="1시간 미만"><span>1시간 미만</span></label>
+          <label class="opt"><input type="radio" name="hours" value="1~3시간"><span>1~3시간</span></label>
+          <label class="opt"><input type="radio" name="hours" value="3~6시간"><span>3~6시간</span></label>
+          <label class="opt"><input type="radio" name="hours" value="6시간 이상"><span>6시간 이상</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-name="pain">
+        <span class="tag">07</span>
+        <h2>가장 번거로운 단계 하나만 고른다면?</h2>
+        <div class="opts two">
+          <label class="opt"><input type="radio" name="pain" value="업체 찾기"><span>업체 찾기</span></label>
+          <label class="opt"><input type="radio" name="pain" value="견적 비교"><span>견적 비교</span></label>
+          <label class="opt"><input type="radio" name="pain" value="결재·승인"><span>결재 · 승인</span></label>
+          <label class="opt"><input type="radio" name="pain" value="일정 조율"><span>일정 조율</span></label>
+          <label class="opt"><input type="radio" name="pain" value="식당 예약"><span>식당 예약</span></label>
+          <label class="opt"><input type="radio" name="pain" value="증빙·정산"><span>증빙 · 정산</span></label>
+          <label class="opt"><input type="radio" name="pain" value="참여 독려"><span>참여 독려</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-name="decider">
+        <span class="tag">08</span>
+        <h2>업체를 최종적으로 정하는 사람은 누구인가요?</h2>
+        <div class="opts two">
+          <label class="opt"><input type="radio" name="decider" value="HR·총무"><span>HR · 총무</span></label>
+          <label class="opt"><input type="radio" name="decider" value="팀장"><span>팀장</span></label>
+          <label class="opt"><input type="radio" name="decider" value="동호회에서 알아서"><span>동호회에서 알아서</span></label>
+          <label class="opt"><input type="radio" name="decider" value="매번 다름"><span>매번 다름</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-name="wish" data-multi="1">
+        <span class="tag">09</span>
+        <h2>이런 활동이 있으면 해보고 싶다</h2>
+        <p class="hint">여러 개 골라도 됩니다.</p>
+        <div class="opts two">
+          <label class="opt box"><input type="checkbox" name="wish" value="쿠킹·베이킹"><span>쿠킹 · 베이킹</span></label>
+          <label class="opt box"><input type="checkbox" name="wish" value="와인·커피"><span>와인 · 커피</span></label>
+          <label class="opt box"><input type="checkbox" name="wish" value="퍼스널컬러·메이크업"><span>퍼스널컬러 · 메이크업</span></label>
+          <label class="opt box"><input type="checkbox" name="wish" value="플라워·향수"><span>플라워 · 향수</span></label>
+          <label class="opt box"><input type="checkbox" name="wish" value="도예·목공·가죽"><span>도예 · 목공 · 가죽</span></label>
+          <label class="opt box"><input type="checkbox" name="wish" value="드로잉·캘리그라피"><span>드로잉 · 캘리그라피</span></label>
+          <label class="opt box"><input type="checkbox" name="wish" value="클라이밍·볼링"><span>클라이밍 · 볼링</span></label>
+          <label class="opt box"><input type="checkbox" name="wish" value="러닝·등산·자전거"><span>러닝 · 등산 · 자전거</span></label>
+          <label class="opt box"><input type="checkbox" name="wish" value="테니스·배드민턴·풋살"><span>테니스 · 배드민턴 · 풋살</span></label>
+          <label class="opt box"><input type="checkbox" name="wish" value="방탈출·보드게임"><span>방탈출 · 보드게임</span></label>
+          <label class="opt box"><input type="checkbox" name="wish" value="요가·필라테스"><span>요가 · 필라테스</span></label>
+          <label class="opt box"><input type="checkbox" name="wish" value="사진"><span>사진</span></label>
+          <label class="opt box"><input type="checkbox" name="wish" value="기타"><span>기타</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-name="report">
+        <span class="tag">10</span>
+        <h2>활동이 끝난 뒤 "효과"를 위에 보고할 일이 있나요?</h2>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="report" value="항상 있다"><span>항상 있다</span></label>
+          <label class="opt"><input type="radio" name="report" value="가끔 있다"><span>가끔 있다</span></label>
+          <label class="opt"><input type="radio" name="report" value="없다"><span>없다</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-name="interest">
+        <span class="tag">11</span>
+        <h2>"조건만 보내면 24시간 안에 제안 3개 + 정산·효과 보고서까지" — 얼마나 관심 있으세요?</h2>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="interest" value="당장 써보고 싶다"><span>당장 써보고 싶다</span></label>
+          <label class="opt"><input type="radio" name="interest" value="다음 활동 때 써볼 수 있다"><span>다음 활동 때 써볼 수 있다</span></label>
+          <label class="opt"><input type="radio" name="interest" value="관심 없다"><span>관심 없다</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-name="free">
+        <span class="tag">12</span>
+        <h2>다음 활동, 무료로 한 번 찾아드려도 될까요?</h2>
+        <p class="hint">조건만 알려주시면 24시간 안에 제안 3개를 보내드립니다. 비용은 없습니다.</p>
+        <div class="opts two">
+          <label class="opt"><input type="radio" name="free" value="네, 연락 주세요"><span>네, 연락 주세요</span></label>
+          <label class="opt"><input type="radio" name="free" value="아니요"><span>아니요, 괜찮습니다</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-name="contact" data-optional="1">
+        <span class="tag">13</span>
+        <h2>마지막으로.</h2>
+        <p class="hint">둘 다 선택입니다. 12번에 "네"라고 하셨으면 이메일만 남겨주세요.</p>
+        <div class="field">
+          <label for="f-email">연락받을 이메일</label>
+          <input id="f-email" name="email" type="email" placeholder="you@company.co.kr" autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="f-note">하고 싶은 말</label>
+          <textarea id="f-note" name="note" placeholder="이런 게 있으면 좋겠다, 이건 걱정된다 — 뭐든지요."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="back" id="back" disabled>&larr; 이전</button>
+      <span class="note" id="navnote">답을 고르면 다음으로 넘어갑니다</span>
+      <button type="button" class="btn" id="next" hidden>다음 &rarr;</button>
+      <button type="submit" class="btn" id="submit" hidden>보내기</button>
+    </div>
+  </form>
+
+  <div class="card done" id="sending" hidden>
+    <span class="sending"><i></i><i></i><i></i></span>
+    <p>보내는 중…</p>
+  </div>
+
+  <div class="card done" id="done" hidden>
+    <p class="big">고맙습니다. <em>잘 받았어요.</em></p>
+    <p id="done-msg">답해주신 내용은 서비스를 만드는 데 그대로 씁니다.</p>
+    <a class="btn" href="../">모두의 취미가 뭔지 보기 &rarr;</a>
+  </div>
+
+  <p class="foot">응답은 통계로만 쓰고, 이메일은 무료 매칭 연락에만 씁니다. · <a href="../">모두의 취미</a></p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ── 응답 저장: Google Form ──────────────────────────────
+     Google Form의 formResponse 주소와 문항별 entry ID를 넣으면 이 페이지의 답이 그 폼으로 들어간다.
+     비어 있으면 메일로 보내기로 대신한다. (entry ID는 폼 만든 뒤 채운다) */
+  var GFORM = {
+    action: "",
+    entries: {
+      size: "", role: "", budget: "", freq: "", source: "", hours: "", pain: "",
+      decider: "", wish: "", report: "", interest: "", free: "", email: "", note: ""
+    }
+  };
+  var TO = "biene2024@gmail.com";
+
+  var form = document.getElementById("survey");
+  var qs = Array.prototype.slice.call(form.querySelectorAll(".q"));
+  var cur = document.getElementById("cur"), fill = document.getElementById("fill"), pbar = document.getElementById("pbar");
+  var back = document.getElementById("back"), next = document.getElementById("next"), submit = document.getElementById("submit");
+  var navnote = document.getElementById("navnote");
+  var idx = 0, timer = null;
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function answered(q) {
+    if (q.dataset.optional) return true;
+    return !!q.querySelector("input:checked");
+  }
+  function doneCount() { return qs.filter(function (q) { return q.dataset.optional ? false : answered(q); }).length; }
+  function show(i, fromLeft) {
+    idx = Math.max(0, Math.min(qs.length - 1, i));
+    qs.forEach(function (q, k) {
+      q.classList.toggle("is-active", k === idx);
+      q.classList.toggle("from-left", k === idx && !!fromLeft);
+    });
+    var q = qs[idx];
+    cur.textContent = idx + 1;
+    var n = doneCount();
+    fill.style.width = (n / (qs.length - 1) * 100) + "%";
+    pbar.setAttribute("aria-valuenow", n);
+    back.disabled = idx === 0;
+    var last = idx === qs.length - 1;
+    var multi = !!q.dataset.multi;
+    next.hidden = last || !multi;
+    submit.hidden = !last;
+    next.disabled = multi && !answered(q);
+    navnote.textContent = last ? "" : (multi ? "고른 뒤 다음을 누르세요" : "답을 고르면 다음으로 넘어갑니다");
+    if (last) setTimeout(function () { var e = q.querySelector("input"); if (e) e.focus(); }, 300);
+  }
+  show(0);
+
+  form.addEventListener("change", function (e) {
+    var q = e.target.closest(".q");
+    if (!q) return;
+    clearTimeout(timer);
+    show(idx);
+    if (e.target.type === "radio" && idx < qs.length - 1) {
+      timer = setTimeout(function () { show(idx + 1); }, reduce ? 0 : 340);
+    }
+  });
+  next.addEventListener("click", function () { if (answered(qs[idx])) show(idx + 1); });
+  back.addEventListener("click", function () { clearTimeout(timer); show(idx - 1, true); });
+
+  function collect() {
+    var f = new FormData(form), out = {};
+    Object.keys(GFORM.entries).forEach(function (k) {
+      var all = f.getAll(k).filter(Boolean);
+      out[k] = all;
+    });
+    return out;
+  }
+  function firstUnanswered() {
+    for (var i = 0; i < qs.length; i++) if (!answered(qs[i])) return i;
+    return -1;
+  }
+
+  function finish(viaMail) {
+    document.getElementById("sending").hidden = true;
+    var d = document.getElementById("done");
+    if (viaMail) document.getElementById("done-msg").textContent = "메일 앱이 열렸다면 그대로 보내주세요. 답해주신 내용은 서비스를 만드는 데 그대로 씁니다.";
+    d.hidden = false;
+    d.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var miss = firstUnanswered();
+    if (miss >= 0) { show(miss, true); return; }
+    var email = form.email.value.trim();
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { form.email.focus(); form.email.reportValidity(); return; }
+
+    var data = collect();
+    form.hidden = true; document.getElementById("intro").hidden = true;
+    document.getElementById("sending").hidden = false;
+
+    if (GFORM.action) {
+      // Google Form은 CORS 응답을 주지 않으므로 no-cors로 던지고 성공으로 간주한다
+      var body = new URLSearchParams();
+      Object.keys(GFORM.entries).forEach(function (k) {
+        var id = GFORM.entries[k]; if (!id) return;
+        data[k].forEach(function (v) { body.append(id, v); });
+      });
+      fetch(GFORM.action, { method: "POST", mode: "no-cors", body: body })
+        .then(function () { finish(false); }, function () { mailFallback(data); });
+    } else {
+      mailFallback(data);
+    }
+  });
+
+  function mailFallback(data) {
+    var L = ["모두의 취미 · 수요조사 응답", "─────────────────────"];
+    var labels = { size: "회사 규모", role: "역할", budget: "1인 지원 예산", freq: "1년 활동 횟수", source: "업체 찾는 곳", hours: "준비 시간",
+                   pain: "가장 번거로운 단계", decider: "최종 결정자", wish: "해보고 싶은 활동", report: "효과 보고", interest: "관심도", free: "무료 매칭", email: "이메일", note: "하고 싶은 말" };
+    Object.keys(labels).forEach(function (k) { if (data[k].length) L.push(labels[k] + ": " + data[k].join(", ")); });
+    var text = L.join("\n");
+    var a = document.createElement("a");
+    a.href = "mailto:" + TO + "?subject=" + encodeURIComponent("[모두의 취미] 수요조사 응답") + "&body=" + encodeURIComponent(text);
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    finish(true);
+  }
+})();
+</script>
+</body>
+</html>

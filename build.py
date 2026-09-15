@@ -4,6 +4,8 @@
 
   index.html       Claude 아티팩트용 — 조각(HTML 스켈레톤 없음), 이미지는 data URI로 삽입
   docs/index.html  GitHub Pages용 — 완전한 문서, 이미지는 docs/img/*.webp 를 상대경로로 참조
+
+  docs/survey/index.html 은 수요조사 설문 페이지 — 이 스크립트가 만들지 않는다. 직접 편집한다.
 """
 import base64
 import pathlib
