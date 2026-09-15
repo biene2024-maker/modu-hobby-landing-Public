@@ -59,8 +59,9 @@ pages = (
 )
 DOCS.mkdir(exist_ok=True)
 (DOCS / "index.html").write_text(pages, encoding="utf-8")
-if (DOCS / "img").exists():
-    shutil.rmtree(DOCS / "img")
-shutil.copytree(IMG, DOCS / "img", ignore=shutil.ignore_patterns("*.md"))
+# OneDrive 가 폴더를 잠그는 일이 있어 rmtree 대신 파일 단위로 덮어쓴다
+(DOCS / "img").mkdir(exist_ok=True)
+for f in IMG.glob("*.webp"):
+    shutil.copyfile(f, DOCS / "img" / f.name)
 (DOCS / ".nojekyll").write_text("")
 print(f"docs/index.html  {len(pages.encode()) / 1024:.0f} KB (GitHub Pages) + docs/img/ {len(list((DOCS / 'img').iterdir()))} files")
