@@ -1739,16 +1739,16 @@ footer b{color:var(--ink-2);font-weight:700}
       ctx.fillText("무료 취미 진단 결과", P, 200);
       // 타입
       ctx.textBaseline = "alphabetic";
-      ctx.fillStyle = INK2; ctx.font = "700 44px " + disp; ctx.fillText("당신은", P, 400);
-      ctx.fillStyle = ACC; ctx.font = "900 108px " + disp; ctx.fillText(state.type[0], P, 510);
+      ctx.fillStyle = INK2; ctx.font = "700 44px " + disp; ctx.fillText("당신은", P, 370);
+      ctx.fillStyle = ACC; ctx.font = "900 108px " + disp; ctx.fillText(state.type[0], P, 475);
       // 설명
       ctx.fillStyle = INK2; ctx.font = "400 34px " + sans;
-      var y = 590;
-      wrap(ctx, state.type[1], W - P * 2).slice(0, 3).forEach(function (l) { ctx.fillText(l, P, y); y += 52; });
-      // 막대 5개
-      y += 40;
+      var y = 545;
+      wrap(ctx, state.type[1], W - P * 2).slice(0, 3).forEach(function (l) { ctx.fillText(l, P, y); y += 46; });
+      // 막대 5개 — 푸터(H-120)와 겹치지 않게 간격을 계산해 둔 값
+      y += 24;
       ctx.strokeStyle = LINE; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(P, y); ctx.lineTo(W - P, y); ctx.stroke();
-      y += 70;
+      y += 60;
       var bx = P + 300, bw = W - P - bx - 130;
       state.top.forEach(function (h) {
         ctx.fillStyle = INK; ctx.font = "700 34px " + sans; ctx.fillText(h.name, P, y + 12);
@@ -1758,12 +1758,12 @@ footer b{color:var(--ink-2);font-weight:700}
         ctx.fillStyle = ACC; roundRect(ctx, bx, y - 4, bw * h.fit / 100, 22, 11); ctx.fill();
         ctx.fillStyle = ACC; ctx.font = "800 34px " + disp; ctx.textAlign = "right";
         ctx.fillText(h.fit + "%", W - P, y + 12); ctx.textAlign = "left";
-        y += 100;
+        y += 88;
       });
       // 푸터
-      ctx.fillStyle = "#F7F4EF"; ctx.fillRect(0, H - 150, W, 150);
-      ctx.fillStyle = INK2; ctx.font = "700 30px " + sans; ctx.fillText("나도 해보기 · 6문항 1분", P, H - 86);
-      ctx.fillStyle = INK3; ctx.font = "400 26px " + sans; ctx.fillText(SITE.replace("https://", ""), P, H - 44);
+      ctx.fillStyle = "#F7F4EF"; ctx.fillRect(0, H - 120, W, 120);
+      ctx.fillStyle = INK2; ctx.font = "700 30px " + sans; ctx.fillText("나도 해보기 · 6문항 1분", P, H - 70);
+      ctx.fillStyle = INK3; ctx.font = "400 26px " + sans; ctx.fillText(SITE.replace("https://", ""), P, H - 32);
       done(c);
     }
     // 웹폰트가 준비된 뒤 그린다 (실패해도 시스템 서체로 진행)
