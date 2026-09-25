@@ -703,12 +703,12 @@ footer b{color:var(--ink-2);font-weight:700}
 
 <nav class="nav">
   <div class="wrap">
-    <a class="brand" href="#top"><span class="dot"></span>모두의 취미</a>
+    <a class="brand" href="https://biene2024-maker.github.io/modu-hobby-landing-Public/"><span class="dot"></span>모두의 취미</a>
     <div class="navlinks">
       <a class="navlink" href="#goals">목적별</a>
-      <a class="navlink" href="#examples">예시</a>
       <a class="navlink" href="#impact">효과 보고서</a>
       <a class="navlink" href="#quiz">취미 진단</a>
+      <a class="navlink" href="https://biene2024-maker.github.io/modu-hobby-landing-Public/nextlife/">NEXT LIFE</a>
       <a class="btn btn-primary btn-sm" href="#request">무료로 제안받기</a>
     </div>
   </div>
@@ -1808,13 +1808,16 @@ footer b{color:var(--ink-2);font-weight:700}
   /* ── 결과 카드 공유 ──
      답 6개를 a/b 여섯 글자로 접어 링크에 싣는다. 링크를 연 사람은 같은 결과를 바로 본다. */
   var SITE = "https://biene2024-maker.github.io/modu-hobby-landing-Public/";
+  /* 랜딩이 3분기 구조가 되면서 이 페이지(FOR TEAMS)는 /teams/ 로 내려갔다.
+     진단 결과 공유 링크는 홈이 아니라 이 페이지를 가리켜야 한다. */
+  var SHARE_BASE = SITE + "teams/";
   var Q = ["q1", "q2", "q3", "q4", "q5", "q6"];
 
   function code() {
     var f = new FormData(form);
     return Q.map(function (k) { return f.get(k) === "1" ? "a" : "b"; }).join("");
   }
-  function shareUrl() { return SITE + "#r=" + code(); }
+  function shareUrl() { return SHARE_BASE + "#r=" + code(); }
   function shareText() {
     var names = state.top.slice(0, 3).map(function (h) { return h.name; }).join(", ");
     return "나는 " + state.type[0] + " — 잘 맞는 취미: " + names + "\n모두의 취미 · 무료 취미 진단";

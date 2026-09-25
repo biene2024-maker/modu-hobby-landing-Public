@@ -1,0 +1,364 @@
+<title>모두의 취미 — 오늘 뭐 하지?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800;900&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@700&display=swap">
+<style>
+/* ── FOR ME ───────────────────────────────────────────────
+   ★ 제품 규칙 (계획서 v2.0 §6.2)
+     이 페이지에는 "상담 요청" · "전화 문의" · "맞춤 견적" 버튼이 없다.
+     건당 수익이 7,500원이라 사람이 18분만 붙으면 수익이 0이 되기 때문이다.
+     조건을 넣으면 후보가 바로 나오고, 예약은 공급자 쪽으로 넘긴다.
+   ------------------------------------------------------- */
+:root{
+  --ground:#FFFFFF;
+  --ground-2:#F7F4EF;
+  --surface:#FFFFFF;
+  --ink:#1B1815;
+  --ink-2:#4F4944;
+  --ink-3:#847C74;
+  --line:#ECE6DE;
+  --line-strong:#D8D0C6;
+  --accent:#E8632B;
+  --accent-soft:#FDE6D8;
+  --accent-text:#C24A14;
+  --accent-hover:#A93E0E;
+  --on-accent:#FFFFFF;
+  --navy:#1E3A5F;
+  --dark:#14161B;
+  --radius:16px;
+  --sans:"Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --display:"Gothic A1","Noto Sans KR",sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+  font-size:17px;line-height:1.75;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{width:min(1080px,calc(100% - 40px));margin-inline:auto}
+@media (max-width:640px){ .wrap{width:calc(100% - 28px)} }
+
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.93);
+  backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.brand{display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-family:var(--display);font-weight:900;font-size:1.06rem;letter-spacing:-.02em}
+.brand .dot{width:11px;height:11px;border-radius:50%;background:var(--accent);flex:none}
+.navlinks{display:flex;align-items:center;gap:20px}
+.navlink{text-decoration:none;color:var(--ink-2);font-size:.92rem;font-weight:500}
+.navlink:hover{color:var(--accent-text)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 22px;border-radius:11px;text-decoration:none;font-weight:700;
+  font-size:.97rem;border:1px solid transparent;cursor:pointer;font-family:var(--sans)}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-soft{background:#fff;border-color:var(--line-strong);color:var(--ink)}
+.btn-soft:hover{border-color:var(--ink-3)}
+.btn-sm{padding:9px 16px;font-size:.92rem}
+
+.hero{padding:74px 0 20px;background:
+  radial-gradient(900px 380px at 20% -10%, var(--accent-soft) 0%, transparent 62%)}
+.kicker{display:inline-block;margin:0 0 16px;padding:6px 14px;border-radius:999px;
+  background:#fff;border:1px solid var(--line-strong);
+  font-size:.82rem;font-weight:700;color:var(--accent-text)}
+.hero h1{font-family:var(--display);font-weight:900;
+  font-size:clamp(2rem,5vw,3.2rem);line-height:1.22;letter-spacing:-.035em;margin:0 0 18px;max-width:14ch}
+.hero h1 em{font-style:normal;color:var(--accent-text)}
+.hero p.sub{margin:0 0 30px;color:var(--ink-2);max-width:56ch;font-size:1.04rem;line-height:1.85}
+
+/* ── 조건 바 ──────────────────────────────────────────── */
+.finder{background:var(--surface);border:1px solid var(--line-strong);border-radius:18px;
+  padding:22px 22px 24px;box-shadow:0 10px 30px rgba(27,24,21,.06)}
+.finder h2{font-family:var(--display);font-weight:800;font-size:1.06rem;margin:0 0 16px}
+.fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:860px){ .fgrid{grid-template-columns:1fr 1fr} }
+@media (max-width:480px){ .fgrid{grid-template-columns:1fr} }
+.fld label{display:block;font-size:.84rem;font-weight:700;color:var(--ink-2);margin-bottom:6px}
+.fld select{width:100%;min-height:46px;padding:10px 12px;border:1px solid var(--line-strong);
+  border-radius:10px;font-family:var(--sans);font-size:.96rem;background:#fff;color:var(--ink)}
+.fld select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.frow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.tog{display:inline-flex;align-items:center;gap:8px;background:var(--ground-2);
+  border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:.9rem;cursor:pointer}
+.tog input{accent-color:var(--accent);width:17px;height:17px}
+
+/* ── 결과 ─────────────────────────────────────────────── */
+.results{padding:34px 0 66px}
+.rhead{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.rhead h3{font-family:var(--display);font-weight:900;font-size:1.25rem;letter-spacing:-.02em;margin:0}
+.rhead span{color:var(--ink-3);font-size:.92rem}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:900px){ .cards{grid-template-columns:1fr 1fr} }
+@media (max-width:600px){ .cards{grid-template-columns:1fr} }
+.item{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  display:flex;flex-direction:column}
+.item figure{margin:0;aspect-ratio:3/2;overflow:hidden;background:var(--ground-2)}
+.item figure img{width:100%;height:100%;object-fit:cover}
+.item .t{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+.item .cat{font-size:.78rem;font-weight:700;letter-spacing:.06em;color:var(--accent-text);
+  text-transform:uppercase;margin-bottom:7px}
+.item h4{font-family:var(--display);font-weight:800;font-size:1.1rem;margin:0 0 8px;letter-spacing:-.02em}
+.item .meta{color:var(--ink-2);font-size:.92rem;line-height:1.7;flex:1;margin:0 0 14px}
+.item .price{font-weight:800;font-variant-numeric:tabular-nums}
+.item .foot{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  border-top:1px solid var(--line);padding-top:13px;margin-top:2px}
+.empty{background:var(--ground-2);border:1px dashed var(--line-strong);border-radius:14px;
+  padding:34px 24px;text-align:center;color:var(--ink-2)}
+
+/* ── 진단 유도 ────────────────────────────────────────── */
+.quizband{background:var(--ground-2);border-block:1px solid var(--line);padding:62px 0}
+.qwrap{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}
+@media (max-width:860px){ .qwrap{grid-template-columns:1fr} }
+.quizband h3{font-family:var(--display);font-weight:900;letter-spacing:-.03em;
+  font-size:clamp(1.4rem,3vw,1.95rem);line-height:1.35;margin:0 0 14px}
+.quizband h3 em{font-style:normal;color:var(--accent-text)}
+.quizband p{margin:0 0 22px;color:var(--ink-2);line-height:1.85}
+.qfig{border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.qfig img{width:100%;aspect-ratio:4/3;object-fit:cover}
+
+/* ── 다른 입구 ────────────────────────────────────────── */
+.other{padding:60px 0}
+.otwo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:760px){ .otwo{grid-template-columns:1fr} }
+.ocard{display:block;text-decoration:none;background:var(--surface);border:1px solid var(--line);
+  border-radius:14px;padding:26px 24px;transition:border-color .16s ease,transform .16s ease}
+.ocard:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.ocard b{display:block;font-family:var(--display);font-weight:900;font-size:1.15rem;margin-bottom:8px}
+.ocard span{color:var(--ink-2);font-size:.95rem;line-height:1.75}
+
+.foot{background:var(--dark);color:#C9C4BD;padding:44px 0;font-size:.9rem}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+.foot a{color:#EDE8E1;text-decoration:none;border-bottom:1px solid #3A3F49}
+.foot .links{display:flex;gap:18px;flex-wrap:wrap}
+</style>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="../"><span class="dot"></span>모두의 취미</a>
+    <div class="navlinks">
+      <a class="navlink" href="#find">지금 찾기</a>
+      <a class="navlink" href="../teams/#quiz">취미 진단</a>
+      <a class="navlink" href="../nextlife/">NEXT LIFE</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="kicker">FOR ME · 나를 위한 시간</span>
+    <h1>오늘 갑자기<br><em>3시간이 비었다면.</em></h1>
+    <p class="sub">
+      무엇을 배울지 먼저 고르지 않으셔도 됩니다.
+      <strong>언제 · 어디서 · 얼마에 · 어떤 기분으로</strong>만 고르면
+      지금 할 수 있는 것을 바로 보여드립니다.
+    </p>
+
+    <!-- ── 조건 입력 ──────────────────────────────────── -->
+    <div class="finder" id="find">
+      <h2>조건을 골라주세요</h2>
+      <div class="fgrid">
+        <div class="fld">
+          <label for="f-area">어디서</label>
+          <select id="f-area">
+            <option value="all">전체</option>
+            <option value="gangnam" selected>강남·역삼</option>
+            <option value="seocho">서초·교대</option>
+            <option value="seongsu">성수·건대</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label for="f-when">언제</label>
+          <select id="f-when">
+            <option value="day">평일 낮</option>
+            <option value="evening" selected>평일 저녁</option>
+            <option value="weekend">주말</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label for="f-budget">얼마에</label>
+          <select id="f-budget">
+            <option value="30000">3만원까지</option>
+            <option value="50000" selected>5만원까지</option>
+            <option value="80000">8만원까지</option>
+            <option value="150000">상관없음</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label for="f-mood">어떤 기분으로</label>
+          <select id="f-mood">
+            <option value="all" selected>아무거나</option>
+            <option value="calm">조용히 집중하고 싶다</option>
+            <option value="move">몸을 움직이고 싶다</option>
+            <option value="make">뭔가 만들고 싶다</option>
+            <option value="tasty">맛있는 걸 하고 싶다</option>
+          </select>
+        </div>
+      </div>
+      <div class="frow">
+        <label class="tog"><input type="checkbox" id="f-solo" checked> 혼자 갑니다</label>
+        <label class="tog"><input type="checkbox" id="f-today"> 오늘 예약되는 곳만</label>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ── 결과 ─────────────────────────────────────────── -->
+  <section class="results">
+    <div class="wrap">
+      <div class="rhead">
+        <h3>지금 가능한 경험</h3>
+        <span id="r-count"></span>
+      </div>
+      <div class="cards" id="r-cards"></div>
+      <div class="empty" id="r-empty" hidden>
+        조건에 맞는 곳이 아직 없습니다. 예산을 올리거나 지역을 넓혀보세요.
+      </div>
+      <p style="margin-top:22px;color:var(--ink-3);font-size:.88rem;line-height:1.7">
+        표시된 곳과 가격은 <strong>예시</strong>입니다. 실제 예약 가능 여부와 최종 금액은 각 공방·스튜디오에서 확인됩니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── 진단 ─────────────────────────────────────────── -->
+  <section class="quizband">
+    <div class="wrap qwrap">
+      <div>
+        <h3>뭘 좋아하는지<br><em>아직 모르시겠다면.</em></h3>
+        <p>
+          여섯 문항이면 됩니다. 조용한 걸 좋아하는지, 몸 쓰는 걸 좋아하는지,
+          혼자가 편한지 같이가 편한지를 보고 잘 맞을 만한 것들을 골라드립니다. 무료입니다.
+        </p>
+        <a class="btn btn-primary" href="../teams/#quiz">1분 취미 진단 해보기</a>
+      </div>
+      <div class="qfig">
+        <img src="__IMG:drawing__" width="900" height="675" loading="lazy"
+             alt="책상 위에서 연필을 쥔 손이 스케치북에 그림을 그리고 있다">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 다른 입구 ────────────────────────────────────── -->
+  <section class="other">
+    <div class="wrap">
+      <div class="otwo">
+        <a class="ocard" href="../teams/">
+          <b>회사에서 찾고 계신가요?</b>
+          <span>팀·동호회 활동이라면 인원·지역·예산만 보내주세요. 활동부터 식당·견적·증빙까지 묶어서 제안드립니다.</span>
+        </a>
+        <a class="ocard" href="../nextlife/">
+          <b>매주 반복되는 모임을 원하신다면</b>
+          <span>4~8명이 매주 같은 요일에 만나는 Circle. 한 번이 아니라 생활의 리듬을 만드는 쪽입니다.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><strong style="font-family:var(--display);color:#fff">모두의 취미</strong> &nbsp;·&nbsp; 좋아하는 일을, 좋은 사람과.</div>
+    <div class="links">
+      <a href="../">홈</a>
+      <a href="../teams/">우리 팀은 뭐 하지?</a>
+      <a href="../nextlife/">앞으로 뭐 하며 살지?</a>
+    </div>
+  </div>
+</footer>
+
+<!-- 이미지 경로 맵.
+     build.py 는 이미지 자리표시자만 바꾼다. JS 안에서 문자열을 이어붙이면
+     자리표시자가 쪼개져 치환되지 않으므로, 경로를 여기서 한 번에 받아 쓴다.
+     아티팩트 빌드에서는 data URI 가, Pages 빌드에서는 ../img/*.webp 가 들어온다. -->
+<script type="application/json" id="img-map">
+{
+  "drawing":      "__IMG:drawing__",
+  "pottery":      "__IMG:pottery__",
+  "perfume":      "__IMG:perfume__",
+  "running-crew": "__IMG:running-crew__",
+  "climbing-gym": "__IMG:climbing-gym__",
+  "coffee-class": "__IMG:coffee-class__",
+  "wine-tasting": "__IMG:wine-tasting__",
+  "flower-class": "__IMG:flower-class__",
+  "outdoor-yoga": "__IMG:outdoor-yoga__",
+  "baking":       "__IMG:baking__",
+  "calligraphy":  "__IMG:calligraphy__",
+  "bowling":      "__IMG:bowling__"
+}
+</script>
+
+<script>
+/* ★ 사람이 붙지 않는다 (계획서 v2.0 §6.2 · §16.3-1)
+   지금은 Activity DB 가 아직 없으므로 아래 표본으로 화면을 검증한다.
+   DB 가 붙으면 ITEMS 를 db/05_segments.sql 의 suggest_for_individual() 응답으로 교체한다.
+   교체 지점은 render() 하나뿐이다. */
+(function () {
+  var ITEMS = [
+    { name: "소묘 한 장 그리기", cat: "드로잉", img: "drawing",      price: 38000, min: 120, area: "gangnam", when: ["evening","weekend"],       mood: ["calm","make"],  solo: true,  today: true },
+    { name: "물레 체험 · 그릇 만들기", cat: "도예", img: "pottery",  price: 45000, min: 120, area: "seongsu", when: ["day","evening","weekend"], mood: ["calm","make"],  solo: true,  today: false },
+    { name: "내 향 만들기", cat: "향수", img: "perfume",             price: 62000, min: 100, area: "gangnam", when: ["evening","weekend"],       mood: ["make"],         solo: true,  today: true },
+    { name: "저녁 러닝 크루", cat: "러닝", img: "running-crew",      price: 0,     min: 60,  area: "gangnam", when: ["evening"],                 mood: ["move"],         solo: true,  today: true },
+    { name: "실내 클라이밍 입문", cat: "클라이밍", img: "climbing-gym", price: 33000, min: 90, area: "seongsu", when: ["day","evening","weekend"], mood: ["move"],        solo: true,  today: true },
+    { name: "핸드드립 커피 클래스", cat: "커피", img: "coffee-class", price: 42000, min: 90,  area: "seocho",  when: ["day","weekend"],           mood: ["calm","tasty"], solo: true,  today: false },
+    { name: "와인 테이스팅", cat: "와인", img: "wine-tasting",       price: 55000, min: 100, area: "gangnam", when: ["evening"],                 mood: ["tasty"],        solo: false, today: true },
+    { name: "플라워 · 계절 꽃다발", cat: "플라워", img: "flower-class", price: 48000, min: 90, area: "seocho", when: ["day","evening"],           mood: ["calm","make"],  solo: true,  today: false },
+    { name: "아침 요가", cat: "요가", img: "outdoor-yoga",           price: 25000, min: 60,  area: "seocho",  when: ["day","weekend"],           mood: ["move","calm"],  solo: true,  today: true },
+    { name: "베이킹 · 스콘 굽기", cat: "베이킹", img: "baking",      price: 52000, min: 120, area: "seongsu", when: ["day","weekend"],           mood: ["make","tasty"], solo: true,  today: false },
+    { name: "캘리그라피 한 시간", cat: "캘리그라피", img: "calligraphy", price: 30000, min: 60, area: "gangnam", when: ["evening","weekend"],     mood: ["calm","make"],  solo: true,  today: true },
+    { name: "볼링 두 게임", cat: "볼링", img: "bowling",             price: 20000, min: 90,  area: "gangnam", when: ["evening","weekend"],       mood: ["move"],         solo: false, today: true }
+  ];
+
+  var AREA = { gangnam: "강남·역삼", seocho: "서초·교대", seongsu: "성수·건대" };
+  var IMG = {};
+  try { IMG = JSON.parse(document.getElementById("img-map").textContent); } catch (e) {}
+  var cards = document.getElementById("r-cards");
+  var empty = document.getElementById("r-empty");
+  var count = document.getElementById("r-count");
+
+  function v(id) { return document.getElementById(id).value; }
+  function on(id) { return document.getElementById(id).checked; }
+
+  function won(n) { return n === 0 ? "무료" : n.toLocaleString("ko-KR") + "원"; }
+
+  function match() {
+    var area = v("f-area"), when = v("f-when"), budget = +v("f-budget"), mood = v("f-mood");
+    var solo = on("f-solo"), today = on("f-today");
+    return ITEMS.filter(function (it) {
+      if (area !== "all" && it.area !== area) return false;
+      if (it.when.indexOf(when) === -1) return false;
+      if (it.price > budget) return false;
+      if (mood !== "all" && it.mood.indexOf(mood) === -1) return false;
+      if (solo && !it.solo) return false;
+      if (today && !it.today) return false;
+      return true;
+    }).slice(0, 6);
+  }
+
+  function render() {
+    var list = match();
+    cards.innerHTML = "";
+    empty.hidden = list.length > 0;
+    count.textContent = list.length ? list.length + "곳" : "";
+    list.forEach(function (it) {
+      var el = document.createElement("article");
+      el.className = "item";
+      el.innerHTML =
+        '<figure><img src="' + (IMG[it.img] || "") + '" width="600" height="400" loading="lazy" alt="' + it.cat + ' 활동 사진"></figure>' +
+        '<div class="t">' +
+          '<span class="cat">' + it.cat + '</span>' +
+          '<h4>' + it.name + '</h4>' +
+          '<p class="meta">' + AREA[it.area] + ' · ' + it.min + '분' + (it.today ? ' · 오늘 예약 가능' : '') + '</p>' +
+          '<div class="foot"><span class="price">' + won(it.price) + '</span>' +
+          '<span class="btn btn-soft btn-sm">예약하러 가기</span></div>' +
+        '</div>';
+      cards.appendChild(el);
+    });
+  }
+
+  ["f-area","f-when","f-budget","f-mood","f-solo","f-today"].forEach(function (id) {
+    document.getElementById(id).addEventListener("change", render);
+  });
+  render();
+})();
+</script>
