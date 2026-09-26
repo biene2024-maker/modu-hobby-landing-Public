@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800;900&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <style>
-/* ── NEXT LIFE 설문 ───────────────────────────────────────
+/* ── 어른의 취미생활 설문 ───────────────────────────────────────
    survey/ 페이지와 같은 엔진이지만 두 가지가 다르다.
    ① 기본 19px · 선택지 최소 높이 58px — 읽는 사람의 눈과 손에 맞춘다
    ② 강조색이 clay 가 아니라 sage — NEXT LIFE 랜딩과 같은 계열
@@ -129,7 +129,7 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
   </div>
 
   <div class="intro" id="intro">
-    <span class="eyebrow">NEXT LIFE 설문</span>
+    <span class="eyebrow">어른의 취미생활 설문</span>
     <h1>요즘 어떤 것에<br>관심이 있으세요?</h1>
     <p>
       요즘 어떤 것에 관심이 있으신지, 어떤 활동이라면 해보고 싶으신지 여쭙습니다.
@@ -361,10 +361,10 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
       <p class="copied" id="copied" hidden>복사했습니다</p>
     </div>
 
-    <a class="btn btn-soft" href="../nextlife/">NEXT LIFE 가 뭔지 보기 &rarr;</a>
+    <a class="btn btn-soft" href="../50plus/">어른의 취미생활이 뭔지 보기 &rarr;</a>
   </div>
 
-  <p class="foot">응답은 통계로만 쓰고, 연락처는 모임 안내에만 씁니다. · <a href="../nextlife/">모두의 취미 · NEXT LIFE</a></p>
+  <p class="foot">응답은 통계로만 쓰고, 연락처는 모임 안내에만 씁니다. · <a href="../50plus/">모두의 취미 · 어른의 취미생활</a></p>
 </div>
 
 <script>
@@ -459,7 +459,7 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
   };
 
   function asText(data) {
-    var L = ["모두의 취미 · NEXT LIFE 설문 응답", "─────────────────────"];
+    var L = ["모두의 취미 · 어른의 취미생활 설문 응답", "─────────────────────"];
     Object.keys(LABELS).forEach(function (k) {
       if (data[k] && data[k].length) L.push(LABELS[k] + ": " + data[k].join(", "));
     });
@@ -475,7 +475,7 @@ input:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
       var text = asText(data);
       document.getElementById("slip").textContent = text;
       document.getElementById("mail-btn").href = "mailto:" + TO
-        + "?subject=" + encodeURIComponent("[모두의 취미] NEXT LIFE 설문 응답")
+        + "?subject=" + encodeURIComponent("[모두의 취미] 어른의 취미생활 설문 응답")
         + "&body=" + encodeURIComponent(text);
       document.getElementById("manual").hidden = false;
     }

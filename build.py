@@ -6,14 +6,14 @@
 
     home.src.html      → docs/index.html          홈 · 3분기 선택
     index.src.html     → docs/teams/index.html    FOR TEAMS (담당자용, 기존 페이지)
-    nextlife.src.html  → docs/nextlife/index.html NEXT LIFE (50+)
+    active50.src.html  → docs/50plus/index.html   어른의 취미생활 (사업부문 50+ Active Life)
     me.src.html        → docs/me/index.html       FOR ME (개인)
 
   아티팩트용 조각(HTML 스켈레톤 없음, 이미지는 data URI)도 같이 만든다.
 
     index.html   ← index.src.html    (기존 아티팩트 URL 이 이 파일을 쓴다. 이름 바꾸지 말 것)
     home.html    ← home.src.html
-    nextlife.html, me.html
+    active50.html, me.html
 
   docs/survey/ 와 docs/survey-50plus/ 는 이 스크립트가 만들지 않는다. 직접 편집한다.
 """
@@ -31,12 +31,12 @@ PLACEHOLDER = re.compile(r"__IMG:([\w-]+)__")
 # (원본, 아티팩트 출력, docs 하위 경로, og:description)
 PAGES = [
     ("home.src.html", "home.html", "",
-     "오늘 뭐 하지? 우리 팀은 뭐 하지? 앞으로 뭐 하며 살지? — 당신의 시간에 맞는 경험을 찾아드립니다."),
+     "반복된 일상에 지친 어른들을 위한 Lifestyle Platform. 갑자기 생긴 시간, 우리 팀 활동, 어른의 취미생활 — 오늘 할 수 있는 경험을 찾아드립니다."),
     ("index.src.html", "index.html", "teams",
      "인원·지역·예산만 보내면 24시간 안에 활동·식당·견적을 묶은 제안 세 가지가 옵니다. "
      "기업 팀·동호회 활동을 담당자 대신 찾고, 예약하고, 증빙하고, 효과까지 보고합니다."),
-    ("nextlife.src.html", "nextlife.html", "nextlife",
-     "화요일에 갈 곳과, 만날 사람이 있는 생활. 4~8명이 매주 같은 요일에 모이는 작은 모임, Circle."),
+    ("active50.src.html", "active50.html", "50plus",
+     "어른의 취미생활 — 시간이 조금 더 내 것이 된 지금. 50+의 새로운 일상을 위한 취미·모임·웰니스·여행."),
     ("me.src.html", "me.html", "me",
      "오늘 갑자기 3시간이 비었다면. 지금 내 주변에서 할 수 있는 것을 찾아드립니다."),
 ]

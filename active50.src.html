@@ -1,9 +1,9 @@
-<title>모두의 취미 — 오늘은 뭐하지?</title>
+<title>모두의 취미 — 어른의 취미생활</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800;900&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@700&display=swap">
 <style>
-/* ── NEXT LIFE ────────────────────────────────────────────
+/* ── 어른의 취미생활 (사업부문명: 50+ Active Life) ────────
    같은 브랜드 토큰을 쓰되 두 가지가 다르다.
    ① 기본 글자 19px (다른 페이지는 17px) — 읽는 사람의 눈에 맞춘다
    ② 버튼·입력칸 최소 높이 52px — 터치 영역을 키운다
@@ -73,6 +73,8 @@ a{color:inherit}
   font-size:clamp(2rem,4.8vw,3.1rem);line-height:1.28;letter-spacing:-.035em;margin:0 0 20px}
 .hero h1 em{font-style:normal;color:var(--accent-text)}
 .hero p{margin:0 0 26px;color:var(--ink-2);font-size:1.06rem;line-height:1.9}
+.hero p.lede{font-family:var(--serif);font-weight:700;color:var(--ink);
+  font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.6;margin-bottom:16px}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
 .hero-fig{border-radius:20px;overflow:hidden;border:1px solid var(--line)}
 .hero-fig img{width:100%;aspect-ratio:4/3;object-fit:cover}
@@ -173,13 +175,14 @@ a{color:inherit}
 <header class="hero" id="top">
   <div class="wrap">
     <div>
-      <span class="kicker">NEXT LIFE · 선물 같은 오늘</span>
-      <h1>아직 젊은 나에게,<br><em>선물 같은 오늘.</em></h1>
+      <span class="kicker">50+ / ACTIVE LIFE</span>
+      <h1>어른의 <em>취미생활</em></h1>
+      <p class="lede">시간이 조금 더 내 것이 된 지금.</p>
       <p>
-        배우고 싶은 것도, 가보고 싶은 곳도 아직 많습니다.
-        혼자 시작하기가 번거로울 뿐이지요.
-        모두의 취미는 매주 같은 요일에 만나는 작은 모임으로
-        <strong>그 하루를 함께</strong> 만들어갑니다.
+        하고 싶었던 것을 배우고, 몸을 움직이고,
+        새로운 사람을 만나고, 때로는 함께 여행을 떠나세요.
+        모두의 취미는 <strong>50+의 새로운 일상</strong>을 위한
+        취미 · 모임 · 웰니스 · 여행 플랫폼입니다.
       </p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#apply">첫 모임 무료로 초대받기</a>
@@ -403,7 +406,7 @@ a{color:inherit}
 
 <footer class="foot">
   <div class="wrap">
-    <div><strong style="font-family:var(--display);color:#fff">모두의 취미</strong> &nbsp;·&nbsp; 좋아하는 일을, 좋은 사람과.</div>
+    <div><strong style="font-family:var(--display);color:#fff">모두의 취미</strong> &nbsp;·&nbsp; 시간이 조금 더 내 것이 된 지금.</div>
     <div class="links">
       <a href="../">홈</a>
       <a href="../survey-50plus/">4분 설문</a>
@@ -437,7 +440,7 @@ a{color:inherit}
       }
     }
     var lines = [
-      "[모두의 취미 · NEXT LIFE 첫 모임 신청]",
+      "[모두의 취미 · 어른의 취미생활 — 첫 모임 신청]",
       "",
       "성함        " + val("f-name"),
       "연락처      " + val("f-contact"),
@@ -450,7 +453,7 @@ a{color:inherit}
     slip.textContent = lines.join("\n");
     box.hidden = false;
     mail.href = "mailto:" + MAIL
-      + "?subject=" + encodeURIComponent("[NEXT LIFE] 첫 모임 신청 — " + val("f-name"))
+      + "?subject=" + encodeURIComponent("[어른의 취미생활] 첫 모임 신청 — " + val("f-name"))
       + "&body=" + encodeURIComponent(lines.join("\n"));
     box.scrollIntoView({ behavior: "smooth", block: "nearest" });
   });

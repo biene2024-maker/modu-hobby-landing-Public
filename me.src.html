@@ -65,7 +65,10 @@ a{color:inherit}
 .hero h1{font-family:var(--display);font-weight:900;
   font-size:clamp(2rem,5vw,3.2rem);line-height:1.22;letter-spacing:-.035em;margin:0 0 18px;max-width:14ch}
 .hero h1 em{font-style:normal;color:var(--accent-text)}
-.hero p.sub{margin:0 0 30px;color:var(--ink-2);max-width:56ch;font-size:1.04rem;line-height:1.85}
+.hero p.sub{margin:0 0 22px;color:var(--ink-2);max-width:56ch;font-size:1.04rem;line-height:1.85}
+.tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 30px;padding:0}
+.tags li{background:#fff;border:1px solid var(--line-strong);border-radius:999px;
+  padding:7px 14px;font-size:.88rem;font-weight:600;color:var(--accent-text)}
 
 /* ── 조건 바 ──────────────────────────────────────────── */
 .finder{background:var(--surface);border:1px solid var(--line-strong);border-radius:18px;
@@ -139,20 +142,22 @@ a{color:inherit}
     <div class="navlinks">
       <a class="navlink" href="#find">지금 찾기</a>
       <a class="navlink" href="../teams/#quiz">취미 진단</a>
-      <a class="navlink" href="../nextlife/">NEXT LIFE</a>
+      <a class="navlink" href="../50plus/">어른의 취미생활</a>
     </div>
   </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="wrap">
-    <span class="kicker">FOR ME · 나를 위한 시간</span>
-    <h1>오늘 갑자기<br><em>3시간이 비었다면.</em></h1>
+    <span class="kicker">FOR ME</span>
+    <h1>갑자기 생긴 시간,<br><em>오늘 뭐 하지?</em></h1>
     <p class="sub">
-      무엇을 배울지 먼저 고르지 않으셔도 됩니다.
-      <strong>언제 · 어디서 · 얼마에 · 어떤 기분으로</strong>만 고르면
-      지금 할 수 있는 것을 바로 보여드립니다.
+      오늘 갈 수 있는 곳. 혼자서도 할 수 있는 것.
+      <strong>내 주변에서 바로 시작할 수 있는</strong> 새로운 경험.
     </p>
+    <ul class="tags" aria-label="이 페이지가 찾아주는 조건">
+      <li>오늘 가능</li><li>내 주변</li><li>혼자 가능</li><li>1~3시간</li><li>바로 예약</li>
+    </ul>
 
     <!-- ── 조건 입력 ──────────────────────────────────── -->
     <div class="finder" id="find">
@@ -247,9 +252,9 @@ a{color:inherit}
           <b>회사에서 찾고 계신가요?</b>
           <span>팀·동호회 활동이라면 인원·지역·예산만 보내주세요. 활동부터 식당·견적·증빙까지 묶어서 제안드립니다.</span>
         </a>
-        <a class="ocard" href="../nextlife/">
-          <b>매주 반복되는 모임을 원하신다면</b>
-          <span>4~8명이 매주 같은 요일에 만나는 Circle. 한 번이 아니라 생활의 리듬을 만드는 쪽입니다.</span>
+        <a class="ocard" href="../50plus/">
+          <b>한 번이 아니라 꾸준히 하고 싶다면</b>
+          <span>어른의 취미생활 — 4~8명이 매주 같은 요일에 만나는 Circle. 같은 사람들과 이어지는 쪽입니다.</span>
         </a>
       </div>
     </div>
@@ -258,11 +263,11 @@ a{color:inherit}
 
 <footer class="foot">
   <div class="wrap">
-    <div><strong style="font-family:var(--display);color:#fff">모두의 취미</strong> &nbsp;·&nbsp; 좋아하는 일을, 좋은 사람과.</div>
+    <div><strong style="font-family:var(--display);color:#fff">모두의 취미</strong> &nbsp;·&nbsp; 당신의 심심함에 MSG를!</div>
     <div class="links">
       <a href="../">홈</a>
       <a href="../teams/">우리 팀은 뭐 하지?</a>
-      <a href="../nextlife/">오늘은 뭐하지?</a>
+      <a href="../50plus/">어른의 취미생활</a>
     </div>
   </div>
 </footer>
