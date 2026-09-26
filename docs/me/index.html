@@ -113,6 +113,8 @@ a{color:inherit}
 .item .t{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
 .item .cat{font-size:.78rem;font-weight:700;letter-spacing:.06em;color:var(--accent-text);
   text-transform:uppercase;margin-bottom:7px}
+.item .meet{display:inline-block;background:var(--navy);color:#fff;border-radius:999px;
+  padding:3px 10px;font-size:.76rem;font-weight:700;margin-left:6px;letter-spacing:0;text-transform:none}
 .item h4{font-family:var(--display);font-weight:800;font-size:1.1rem;margin:0 0 8px;letter-spacing:-.02em}
 .item .meta{color:var(--ink-2);font-size:.92rem;line-height:1.7;flex:1;margin:0 0 14px}
 .item .price{font-weight:800;font-variant-numeric:tabular-nums}
@@ -167,10 +169,10 @@ a{color:inherit}
     <h1>갑자기 생긴 시간,<br><em>오늘 뭐 하지?</em></h1>
     <p class="sub">
       오늘 갈 수 있는 곳. 혼자서도 할 수 있는 것.
-      <strong>내 주변에서 바로 시작할 수 있는</strong> 새로운 경험.
+      <strong>혼자 신청해도 거기서 사람들과 어울릴 수 있는</strong> 새로운 경험.
     </p>
     <ul class="tags" aria-label="이 페이지가 찾아주는 조건">
-      <li>오늘 가능</li><li>내 주변</li><li>혼자 가능</li><li>1~3시간</li><li>바로 예약</li>
+      <li>오늘 가능</li><li>내 주변</li><li>혼자 가능</li><li>혼자 가서 같이</li><li>1~3시간</li><li>바로 예약</li>
     </ul>
 
     <!-- ── 조건 입력 ──────────────────────────────────── -->
@@ -216,6 +218,7 @@ a{color:inherit}
       </div>
       <div class="frow">
         <label class="tog"><input type="checkbox" id="f-solo" checked> 혼자 갑니다</label>
+        <label class="tog"><input type="checkbox" id="f-meet"> 거기서 사람들과 어울려도 좋아요</label>
         <label class="tog"><input type="checkbox" id="f-today"> 오늘 예약되는 곳만</label>
       </div>
     </div>
@@ -314,18 +317,18 @@ a{color:inherit}
    교체 지점은 render() 하나뿐이다. */
 (function () {
   var ITEMS = [
-    { name: "소묘 한 장 그리기", cat: "드로잉", img: "drawing",      price: 38000, min: 120, area: "gangnam", when: ["evening","weekend"],       mood: ["calm","make"],  solo: true,  today: true },
-    { name: "물레 체험 · 그릇 만들기", cat: "도예", img: "pottery",  price: 45000, min: 120, area: "seongsu", when: ["day","evening","weekend"], mood: ["calm","make"],  solo: true,  today: false },
-    { name: "내 향 만들기", cat: "향수", img: "perfume",             price: 62000, min: 100, area: "gangnam", when: ["evening","weekend"],       mood: ["make"],         solo: true,  today: true },
-    { name: "저녁 러닝 크루", cat: "러닝", img: "running-crew",      price: 0,     min: 60,  area: "gangnam", when: ["evening"],                 mood: ["move"],         solo: true,  today: true },
-    { name: "실내 클라이밍 입문", cat: "클라이밍", img: "climbing-gym", price: 33000, min: 90, area: "seongsu", when: ["day","evening","weekend"], mood: ["move"],        solo: true,  today: true },
-    { name: "핸드드립 커피 클래스", cat: "커피", img: "coffee-class", price: 42000, min: 90,  area: "seocho",  when: ["day","weekend"],           mood: ["calm","tasty"], solo: true,  today: false },
-    { name: "와인 테이스팅", cat: "와인", img: "wine-tasting",       price: 55000, min: 100, area: "gangnam", when: ["evening"],                 mood: ["tasty"],        solo: false, today: true },
-    { name: "플라워 · 계절 꽃다발", cat: "플라워", img: "flower-class", price: 48000, min: 90, area: "seocho", when: ["day","evening"],           mood: ["calm","make"],  solo: true,  today: false },
-    { name: "아침 요가", cat: "요가", img: "outdoor-yoga",           price: 25000, min: 60,  area: "seocho",  when: ["day","weekend"],           mood: ["move","calm"],  solo: true,  today: true },
-    { name: "베이킹 · 스콘 굽기", cat: "베이킹", img: "baking",      price: 52000, min: 120, area: "seongsu", when: ["day","weekend"],           mood: ["make","tasty"], solo: true,  today: false },
-    { name: "캘리그라피 한 시간", cat: "캘리그라피", img: "calligraphy", price: 30000, min: 60, area: "gangnam", when: ["evening","weekend"],     mood: ["calm","make"],  solo: true,  today: true },
-    { name: "볼링 두 게임", cat: "볼링", img: "bowling",             price: 20000, min: 90,  area: "gangnam", when: ["evening","weekend"],       mood: ["move"],         solo: false, today: true }
+    { name: "소묘 한 장 그리기", cat: "드로잉", img: "drawing",      price: 38000, min: 120, area: "gangnam", when: ["evening","weekend"],       mood: ["calm","make"],  solo: true,  today: true, meet: false },
+    { name: "물레 체험 · 그릇 만들기", cat: "도예", img: "pottery",  price: 45000, min: 120, area: "seongsu", when: ["day","evening","weekend"], mood: ["calm","make"],  solo: true,  today: false, meet: false },
+    { name: "내 향 만들기", cat: "향수", img: "perfume",             price: 62000, min: 100, area: "gangnam", when: ["evening","weekend"],       mood: ["make"],         solo: true,  today: true, meet: false },
+    { name: "저녁 러닝 크루", cat: "러닝", img: "running-crew",      price: 0,     min: 60,  area: "gangnam", when: ["evening"],                 mood: ["move"],         solo: true,  today: true, meet: true },
+    { name: "실내 클라이밍 입문", cat: "클라이밍", img: "climbing-gym", price: 33000, min: 90, area: "seongsu", when: ["day","evening","weekend"], mood: ["move"],        solo: true,  today: true, meet: true },
+    { name: "핸드드립 커피 클래스", cat: "커피", img: "coffee-class", price: 42000, min: 90,  area: "seocho",  when: ["day","weekend"],           mood: ["calm","tasty"], solo: true,  today: false, meet: true },
+    { name: "와인 테이스팅", cat: "와인", img: "wine-tasting",       price: 55000, min: 100, area: "gangnam", when: ["evening"],                 mood: ["tasty"],        solo: false, today: true, meet: true },
+    { name: "플라워 · 계절 꽃다발", cat: "플라워", img: "flower-class", price: 48000, min: 90, area: "seocho", when: ["day","evening"],           mood: ["calm","make"],  solo: true,  today: false, meet: false },
+    { name: "아침 요가", cat: "요가", img: "outdoor-yoga",           price: 25000, min: 60,  area: "seocho",  when: ["day","weekend"],           mood: ["move","calm"],  solo: true,  today: true, meet: true },
+    { name: "베이킹 · 스콘 굽기", cat: "베이킹", img: "baking",      price: 52000, min: 120, area: "seongsu", when: ["day","weekend"],           mood: ["make","tasty"], solo: true,  today: false, meet: true },
+    { name: "캘리그라피 한 시간", cat: "캘리그라피", img: "calligraphy", price: 30000, min: 60, area: "gangnam", when: ["evening","weekend"],     mood: ["calm","make"],  solo: true,  today: true, meet: false },
+    { name: "볼링 두 게임", cat: "볼링", img: "bowling",             price: 20000, min: 90,  area: "gangnam", when: ["evening","weekend"],       mood: ["move"],         solo: false, today: true, meet: true }
   ];
 
   var AREA = { gangnam: "강남·역삼", seocho: "서초·교대", seongsu: "성수·건대" };
@@ -342,13 +345,14 @@ a{color:inherit}
 
   function match() {
     var area = v("f-area"), when = v("f-when"), budget = +v("f-budget"), mood = v("f-mood");
-    var solo = on("f-solo"), today = on("f-today");
+    var solo = on("f-solo"), meet = on("f-meet"), today = on("f-today");
     return ITEMS.filter(function (it) {
       if (area !== "all" && it.area !== area) return false;
       if (it.when.indexOf(when) === -1) return false;
       if (it.price > budget) return false;
       if (mood !== "all" && it.mood.indexOf(mood) === -1) return false;
       if (solo && !it.solo) return false;
+      if (meet && !it.meet) return false;   // 혼자 신청해도 여럿과 함께하는 곳만
       if (today && !it.today) return false;
       return true;
     }).slice(0, 6);
@@ -365,7 +369,7 @@ a{color:inherit}
       el.innerHTML =
         '<figure><img src="' + (IMG[it.img] || "") + '" width="600" height="400" loading="lazy" alt="' + it.cat + ' 활동 사진"></figure>' +
         '<div class="t">' +
-          '<span class="cat">' + it.cat + '</span>' +
+          '<span class="cat">' + it.cat + (it.meet ? '<span class="meet">혼자 가서 같이</span>' : '') + '</span>' +
           '<h4>' + it.name + '</h4>' +
           '<p class="meta">' + AREA[it.area] + ' · ' + it.min + '분' + (it.today ? ' · 오늘 예약 가능' : '') + '</p>' +
           '<div class="foot"><span class="price">' + won(it.price) + '</span>' +
@@ -375,7 +379,7 @@ a{color:inherit}
     });
   }
 
-  ["f-area","f-when","f-budget","f-mood","f-solo","f-today"].forEach(function (id) {
+  ["f-area","f-when","f-budget","f-mood","f-solo","f-meet","f-today"].forEach(function (id) {
     document.getElementById(id).addEventListener("change", render);
   });
   render();
