@@ -154,6 +154,16 @@ a{color:inherit}
 .mission em{font-style:normal;font-weight:700;color:var(--accent-text)}
 .msg-key{display:block;margin:-6px auto 22px;font-size:.92rem;color:var(--ink-2);letter-spacing:.01em}
 .msg-key b{color:var(--accent-text)}
+/* ── 모바일: 한글 단어 단위 줄바꿈 · 내비 한 줄 유지 ── */
+body{word-break:keep-all;overflow-wrap:break-word}
+.brand{white-space:nowrap;flex:none}
+.navlink,.navlinks .btn{white-space:nowrap}
+@media (max-width:560px){
+  .nav .wrap{gap:12px}
+  .navlinks{gap:12px;min-width:0;overflow-x:auto;scrollbar-width:none}
+  .navlinks::-webkit-scrollbar{display:none}
+  .navlink{font-size:.8rem}
+}
 </style>
 
 </head>

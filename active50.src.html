@@ -159,6 +159,20 @@ a{color:inherit}
 .foot .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
 .foot a{color:#EDE8E1;text-decoration:none;border-bottom:1px solid #3A3F3B}
 .foot .links{display:flex;gap:18px;flex-wrap:wrap}
+/* ── 모바일: 한글 단어 단위 줄바꿈 · 내비 한 줄 유지 ── */
+body{word-break:keep-all;overflow-wrap:break-word}
+.brand{white-space:nowrap;flex:none}
+.navlink,.navlinks .btn{white-space:nowrap}
+@media (max-width:560px){
+  .nav .wrap{gap:12px}
+  .navlinks{gap:12px;min-width:0;overflow-x:auto;scrollbar-width:none}
+  .navlinks::-webkit-scrollbar{display:none}
+  .navlink{font-size:.8rem}
+}
+@media (max-width:560px){
+  .navlinks .navlink{display:none}
+  .navlinks .btn{padding:8px 14px!important;font-size:.85rem!important;min-height:40px!important}
+}
 </style>
 
 <nav class="nav">
