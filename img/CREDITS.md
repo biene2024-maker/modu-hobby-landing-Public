@@ -47,14 +47,14 @@
 - `s50-linedance.webp` — https://www.pexels.com/photo/12086684/
 - `s50-tteok.webp` — https://www.pexels.com/photo/34250175/
 - `s50-slowjog.webp` — https://www.pexels.com/photo/7267348/
-- `s50-flower.webp` — https://www.pexels.com/photo/34210558/
+- `s50-singing.webp` — https://www.pexels.com/photo/6762298/ (3차: 플라워 클래스 → 노래교실 · 7080 가요)
 
 ## Pexels (2026-10-05 취득) — FOR ME 페이지
 
 같은 기준: **혼자가 아니라 함께 웃는 장면**("혼자 가서 같이"). 손·사물만 나온 사진(도예·드로잉·커피·플라워·베이킹·캘리·볼링)을 사람 얼굴이 보이는 수업 장면으로 교체.
 FOR TEAMS 제안서·모자이크가 기존 파일을 쓰므로 덮어쓰지 않고 `me-` 접두사로 따로 저장했다. 향수는 그룹 무료 사진이 없어 기존 사진 유지.
 
-- `me-pottery.webp` — https://www.pexels.com/photo/9304496/
+- `me-knitting.webp` — https://www.pexels.com/photo/5691902/ (3차: 물레 → 뜨개질로 잡생각 비우기. 성인 그룹 뜨개질 무료 사진이 없어 1인 사진)
 - `me-drawing.webp` — https://www.pexels.com/photo/7256203/ (사람 쪽으로 확대 크롭)
 - `me-calligraphy.webp` — https://www.pexels.com/photo/8843717/
 - `me-coffee.webp` — https://www.pexels.com/photo/7176003/
