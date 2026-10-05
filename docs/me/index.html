@@ -196,7 +196,8 @@ body{word-break:keep-all;overflow-wrap:break-word}
     <span class="kicker">FOR ME</span>
     <h1>갑자기 생긴 시간,<br><em>오늘 뭐 하지?</em></h1>
     <p class="sub">
-      오늘 갈 수 있는 곳. 혼자서도 할 수 있는 것.
+      퇴근 후 남는 두세 시간, 지친 머리를 비울 곳.
+      오늘 갈 수 있고, 혼자서도 할 수 있고,
       <strong>혼자 신청해도 거기서 사람들과 어울릴 수 있는</strong> 새로운 경험.
     </p>
     <p class="mission" style="margin:24px 0 26px">
@@ -206,19 +207,19 @@ body{word-break:keep-all;overflow-wrap:break-word}
     </div>
     <div class="memosaic">
       <figure>
-        <img src="../img/me-pottery.webp" width="900" height="675"
+        <img src="../img/me-singingbowl.webp" width="900" height="675"
+             alt="하얀 방에서 사람들이 매트에 누워 싱잉볼과 공 소리를 들으며 쉬고 있다">
+        <figcaption>싱잉볼 명상으로 꿀잠</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/me-bonsai.webp" width="900" height="675" loading="lazy"
+             alt="두 사람이 작은 분재 화분을 들고 웃으며 이야기하고 있다">
+        <figcaption>1일 분재 클래스</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/me-pottery.webp" width="900" height="675" loading="lazy"
              alt="물레 앞에 나란히 앉은 두 사람이 서로를 보며 웃으며 그릇을 빚고 있다">
         <figcaption>도예 원데이</figcaption>
-      </figure>
-      <figure>
-        <img src="../img/me-bowling.webp" width="900" height="675" loading="lazy"
-             alt="볼링장에서 네 친구가 볼링공을 들고 활짝 웃고 있다">
-        <figcaption>볼링</figcaption>
-      </figure>
-      <figure>
-        <img src="../img/me-flower.webp" width="900" height="675" loading="lazy"
-             alt="꽃 공방에서 두 사람이 웃으며 함께 꽃다발을 만들고 있다">
-        <figcaption>플라워</figcaption>
       </figure>
     </div>
     </div>
@@ -346,6 +347,8 @@ body{word-break:keep-all;overflow-wrap:break-word}
      아티팩트 빌드에서는 data URI 가, Pages 빌드에서는 ../img/*.webp 가 들어온다. -->
 <script type="application/json" id="img-map">
 {
+  "me-singingbowl": "../img/me-singingbowl.webp",
+  "me-bonsai":    "../img/me-bonsai.webp",
   "me-drawing":   "../img/me-drawing.webp",
   "me-pottery":   "../img/me-pottery.webp",
   "me-coffee":    "../img/me-coffee.webp",
@@ -368,18 +371,20 @@ body{word-break:keep-all;overflow-wrap:break-word}
    교체 지점은 render() 하나뿐이다. */
 (function () {
   var ITEMS = [
-    { name: "소묘 한 장 그리기", cat: "드로잉", img: "me-drawing",      price: 38000, min: 120, area: "gangnam", when: ["evening","weekend"],       mood: ["calm","make"],  solo: true,  today: true, meet: false },
-    { name: "물레 체험 · 그릇 만들기", cat: "도예", img: "me-pottery",  price: 45000, min: 120, area: "seongsu", when: ["day","evening","weekend"], mood: ["calm","make"],  solo: true,  today: false, meet: false },
-    { name: "내 향 만들기", cat: "향수", img: "perfume",             price: 62000, min: 100, area: "gangnam", when: ["evening","weekend"],       mood: ["make"],         solo: true,  today: true, meet: false },
-    { name: "저녁 러닝 크루", cat: "러닝", img: "running-crew",      price: 0,     min: 60,  area: "gangnam", when: ["evening"],                 mood: ["move"],         solo: true,  today: true, meet: true },
-    { name: "실내 클라이밍 입문", cat: "클라이밍", img: "climbing-gym", price: 33000, min: 90, area: "seongsu", when: ["day","evening","weekend"], mood: ["move"],        solo: true,  today: true, meet: true },
-    { name: "핸드드립 커피 클래스", cat: "커피", img: "me-coffee", price: 42000, min: 90,  area: "seocho",  when: ["day","weekend"],           mood: ["calm","tasty"], solo: true,  today: false, meet: true },
-    { name: "와인 테이스팅", cat: "와인", img: "wine-tasting",       price: 55000, min: 100, area: "gangnam", when: ["evening"],                 mood: ["tasty"],        solo: false, today: true, meet: true },
-    { name: "플라워 · 계절 꽃다발", cat: "플라워", img: "me-flower", price: 48000, min: 90, area: "seocho", when: ["day","evening"],           mood: ["calm","make"],  solo: true,  today: false, meet: false },
-    { name: "아침 요가", cat: "요가", img: "outdoor-yoga",           price: 25000, min: 60,  area: "seocho",  when: ["day","weekend"],           mood: ["move","calm"],  solo: true,  today: true, meet: true },
-    { name: "베이킹 · 스콘 굽기", cat: "베이킹", img: "me-baking",      price: 52000, min: 120, area: "seongsu", when: ["day","weekend"],           mood: ["make","tasty"], solo: true,  today: false, meet: true },
-    { name: "캘리그라피 한 시간", cat: "캘리그라피", img: "me-calligraphy", price: 30000, min: 60, area: "gangnam", when: ["evening","weekend"],     mood: ["calm","make"],  solo: true,  today: true, meet: false },
-    { name: "볼링 두 게임", cat: "볼링", img: "me-bowling",             price: 20000, min: 90,  area: "gangnam", when: ["evening","weekend"],       mood: ["move"],         solo: false, today: true, meet: true }
+    { name: "싱잉볼 명상으로 꿀잠 자기", cat: "명상", img: "me-singingbowl", price: 35000, min: 70, area: "gangnam", when: ["evening","weekend"], mood: ["calm"], solo: true, today: true, meet: false },
+    { name: "1일 분재 클래스로 생각 정리하기", cat: "분재", img: "me-bonsai", price: 49000, min: 120, area: "gangnam", when: ["evening","weekend"], mood: ["calm","make"], solo: true, today: true, meet: true },
+    { name: "소묘 한 장으로 머리 식히기", cat: "드로잉", img: "me-drawing",      price: 38000, min: 120, area: "gangnam", when: ["evening","weekend"],       mood: ["calm","make"],  solo: true,  today: true, meet: false },
+    { name: "물레 앞에서 잡생각 비우기", cat: "도예", img: "me-pottery",  price: 45000, min: 120, area: "seongsu", when: ["day","evening","weekend"], mood: ["calm","make"],  solo: true,  today: false, meet: false },
+    { name: "내 향 만들어 기분 전환하기", cat: "향수", img: "perfume",             price: 62000, min: 100, area: "gangnam", when: ["evening","weekend"],       mood: ["make"],         solo: true,  today: true, meet: false },
+    { name: "퇴근길 러닝 크루로 스트레스 털기", cat: "러닝", img: "running-crew",      price: 0,     min: 60,  area: "gangnam", when: ["evening"],                 mood: ["move"],         solo: true,  today: true, meet: true },
+    { name: "클라이밍으로 하루 털어내기", cat: "클라이밍", img: "climbing-gym", price: 33000, min: 90, area: "seongsu", when: ["day","evening","weekend"], mood: ["move"],        solo: true,  today: true, meet: true },
+    { name: "핸드드립 커피로 주말 아침 여유 찾기", cat: "커피", img: "me-coffee", price: 42000, min: 90,  area: "seocho",  when: ["day","weekend"],           mood: ["calm","tasty"], solo: true,  today: false, meet: true },
+    { name: "와인 한 잔, 처음 보는 사람들과", cat: "와인", img: "wine-tasting",       price: 55000, min: 100, area: "gangnam", when: ["evening"],                 mood: ["tasty"],        solo: false, today: true, meet: true },
+    { name: "계절 꽃다발로 책상 환기하기", cat: "플라워", img: "me-flower", price: 48000, min: 90, area: "seocho", when: ["day","evening"],           mood: ["calm","make"],  solo: true,  today: false, meet: false },
+    { name: "아침 요가로 몸 깨우기", cat: "요가", img: "outdoor-yoga",           price: 25000, min: 60,  area: "seocho",  when: ["day","weekend"],           mood: ["move","calm"],  solo: true,  today: true, meet: true },
+    { name: "스콘 구워 나눠 먹기", cat: "베이킹", img: "me-baking",      price: 52000, min: 120, area: "seongsu", when: ["day","weekend"],           mood: ["make","tasty"], solo: true,  today: false, meet: true },
+    { name: "한 글자씩 마음 가라앉히기", cat: "캘리그라피", img: "me-calligraphy", price: 30000, min: 60, area: "gangnam", when: ["evening","weekend"],     mood: ["calm","make"],  solo: true,  today: true, meet: false },
+    { name: "볼링 두 게임으로 웃고 오기", cat: "볼링", img: "me-bowling",             price: 20000, min: 90,  area: "gangnam", when: ["evening","weekend"],       mood: ["move"],         solo: false, today: true, meet: true }
   ];
 
   var AREA = { gangnam: "강남·역삼", seocho: "서초·교대", seongsu: "성수·건대" };

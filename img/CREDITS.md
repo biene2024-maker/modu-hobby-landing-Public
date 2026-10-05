@@ -39,21 +39,15 @@
 - `drawing.webp` — https://images.unsplash.com/photo-1614712201488-9942af86b87b
 - `calligraphy.webp` — https://images.unsplash.com/photo-1546638008-efbe0b62c730
 
-## Pexels (2026-10-05 취득) — 어른의 취미생활 페이지
+## Pexels (2026-10-05 취득, 2차) — 어른의 취미생활 페이지
 
-[Pexels License](https://www.pexels.com/license/) — 상업적 이용 가능, 출처 표기 의무 없음. 아래는 추적용 기록이다.
-선정 기준: 50~60대가 **혼자가 아니라 여럿이 함께** 웃는 장면. 요양시설 분위기 사진은 제외(대상은 액티브 55~64세).
-분재·싱잉볼을 시니어 그룹이 함께하는 무료 사진은 찾지 못했다 — 분재는 히어로의 Circle 예시 카드에 글로만 넣었다.
+창업자 피드백 반영: **요즘 50~60대는 젊어 보인다** — 너무 나이 들어 보이는 사진 제외, 활동은 **코치·강사·전문 업체가 진행하는 것**으로.
+1차 사진 7장(senior-*·singing-bowl-group)은 교체하며 삭제했다. 떡과 사람이 함께 나온 무료 사진이 없어 떡지순례는 시장 골목 투어 장면으로 대신했다.
 
-- `senior-dance-class.webp` — https://www.pexels.com/photo/elderly-woman-in-pink-shirt-dancing-12086688/
-- `senior-stretch-class.webp` — https://www.pexels.com/photo/women-dancing-in-the-hall-12086683/
-- `singing-bowl-group.webp` — https://www.pexels.com/photo/outdoor-group-meditation-with-singing-bowls-38337204/
-- `senior-walk-friends.webp` — https://www.pexels.com/photo/smiling-senior-friends-enjoying-outdoor-adventure-31557715/
-- `senior-cafe-friends.webp` — https://www.pexels.com/photo/two-women-enjoying-coffee-indoors-with-friends-34197179/
-- `senior-garden-outing.webp` — https://www.pexels.com/photo/joyful-seniors-posing-in-vibrant-garden-34210553/
-- `senior-orchard-walk.webp` — https://www.pexels.com/photo/senior-women-enjoying-citrus-orchard-day-out-34223011/
-
-1400px JPG로 받아 4:3 중앙 크롭(카페 사진은 얼굴 위치에 맞춰 위쪽 18%에서 크롭) 후 900×675 WebP(q72).
+- `s50-linedance.webp` — https://www.pexels.com/photo/12086684/
+- `s50-tteok.webp` — https://www.pexels.com/photo/34250175/
+- `s50-slowjog.webp` — https://www.pexels.com/photo/7267348/
+- `s50-flower.webp` — https://www.pexels.com/photo/34210558/
 
 ## Pexels (2026-10-05 취득) — FOR ME 페이지
 
@@ -67,3 +61,5 @@ FOR TEAMS 제안서·모자이크가 기존 파일을 쓰므로 덮어쓰지 않
 - `me-flower.webp` — https://www.pexels.com/photo/5409681/
 - `me-baking.webp` — https://www.pexels.com/photo/6223063/
 - `me-bowling.webp` — https://www.pexels.com/photo/7429786/
+- `me-singingbowl.webp` — https://www.pexels.com/photo/6252173/ (2차 추가: 싱잉볼 명상으로 꿀잠 자기)
+- `me-bonsai.webp` — https://www.pexels.com/photo/5709219/ (2차 추가: 1일 분재 클래스로 생각 정리하기)
