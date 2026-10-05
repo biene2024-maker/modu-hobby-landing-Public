@@ -54,3 +54,16 @@
 - `senior-orchard-walk.webp` — https://www.pexels.com/photo/senior-women-enjoying-citrus-orchard-day-out-34223011/
 
 1400px JPG로 받아 4:3 중앙 크롭(카페 사진은 얼굴 위치에 맞춰 위쪽 18%에서 크롭) 후 900×675 WebP(q72).
+
+## Pexels (2026-10-05 취득) — FOR ME 페이지
+
+같은 기준: **혼자가 아니라 함께 웃는 장면**("혼자 가서 같이"). 손·사물만 나온 사진(도예·드로잉·커피·플라워·베이킹·캘리·볼링)을 사람 얼굴이 보이는 수업 장면으로 교체.
+FOR TEAMS 제안서·모자이크가 기존 파일을 쓰므로 덮어쓰지 않고 `me-` 접두사로 따로 저장했다. 향수는 그룹 무료 사진이 없어 기존 사진 유지.
+
+- `me-pottery.webp` — https://www.pexels.com/photo/9304496/
+- `me-drawing.webp` — https://www.pexels.com/photo/7256203/ (사람 쪽으로 확대 크롭)
+- `me-calligraphy.webp` — https://www.pexels.com/photo/8843717/
+- `me-coffee.webp` — https://www.pexels.com/photo/7176003/
+- `me-flower.webp` — https://www.pexels.com/photo/5409681/
+- `me-baking.webp` — https://www.pexels.com/photo/6223063/
+- `me-bowling.webp` — https://www.pexels.com/photo/7429786/
